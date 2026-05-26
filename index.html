@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>स्वप्रमाणित घोषणा पत्र</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+
+    .filled-data {
+      font-family: 'Kalam', cursive !important;
+      border-bottom: 2px dotted #3b82f6;
+      color: #60a5fa;
+      padding: 0 6px;
+      font-weight: 700;
+      display: inline-block;
+      min-width: 80px;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+    * {
+      font-family: 'Kalam', cursive !important;
+    }
+
+    body {
+      font-family: 'Anek Devanagari', sans-serif;
+      background: #f3f4f6;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: crosshair;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: white;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="p-6">
+
+<div class="max-w-5xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-blue-700">स्वप्रमाणित घोषणा पत्र फॉर्म</h1>
+
+    <button onclick="resetForm()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+      Create New
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <input type="text" id="name" placeholder="नाम" class="border p-3 rounded-lg">
+    <input type="text" id="father" placeholder="पुत्र/पुत्री/पति श्री" class="border p-3 rounded-lg">
+
+    <input type="text" id="mother" placeholder="माता श्रीमती" class="border p-3 rounded-lg">
+    <input type="date" id="dob" class="border p-3 rounded-lg">
+
+    <input type="text" id="business" placeholder="व्यवसाय" class="border p-3 rounded-lg">
+    <input type="text" id="birthPlace" placeholder="जन्म स्थान" class="border p-3 rounded-lg">
+
+    <input type="text" id="caste" placeholder="जाति" class="border p-3 rounded-lg">
+    <input type="text" id="subcaste" placeholder="उपजाति" class="border p-3 rounded-lg">
+
+    <input type="text" id="address" placeholder="निवास" class="border p-3 rounded-lg">
+    <input type="text" id="police" placeholder="थाना" class="border p-3 rounded-lg">
+
+    <input type="text" id="tehsil" placeholder="तहसील" class="border p-3 rounded-lg">
+    <input type="text" id="district" placeholder="जिला" class="border p-3 rounded-lg">
+
+  </div>
+
+  <div class="mt-6 flex flex-wrap gap-4">
+    <div>
+      <label class="font-semibold block mb-2">हस्ताक्षर Upload करें</label>
+      <input type="file" id="signatureUpload" accept="image/*" class="border p-2 rounded-lg">
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">या Draw करें</label>
+      <canvas id="signatureCanvas" width="300" height="120"></canvas>
+      <div class="mt-2 flex gap-2">
+        <button onclick="clearCanvas()" class="bg-gray-500 text-white px-3 py-1 rounded">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <button onclick="generateForm()" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 text-lg">
+      Generate Form
+    </button>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+
+    <div id="printArea" class="p-6 border rounded-xl">
+
+      <h2 class="text-center text-2xl font-bold mb-2">
+        स्वप्रमाणित घोषणा - पत्र
+      </h2>
+
+      <h3 class="text-center text-sm mb-6 font-semibold">
+        आय/जाति/निवास प्रमाण - पत्र हेतु
+      </h3>
+
+      <p class="leading-9 text-lg text-justify">
+        मैं <span id="p_name" class="filled-data"></span>
+        पुत्र/पुत्री/पति श्री <span id="p_father" class="filled-data"></span>
+        माता श्रीमती <span id="p_mother" class="filled-data"></span>
+        जन्म तिथि <span id="p_dob" class="filled-data"></span>
+        व्यवसाय <span id="p_business" class="filled-data"></span>
+        जन्म स्थान <span id="p_birthPlace" class="filled-data"></span>
+        जाति <span id="p_caste" class="filled-data"></span>
+        उपजाति <span id="p_subcaste" class="filled-data"></span>
+        निवासी <span id="p_address" class="filled-data"></span>
+        थाना <span id="p_police" class="filled-data"></span>
+        तहसील <span id="p_tehsil" class="filled-data"></span>
+        जिला <span id="p_district" class="filled-data"></span>
+        घोषणा करता/करती हूँ कि आवेदन पत्र में दिए गये विवरण तथ्य एवं मेरी जानकारी विश्वास में शुद्ध एवं सत्य है। मैं मिथ्या विवरण तथ्यों को देने के परिणामों से भलीभांति अवगत हूँ। यदि आवेदन पत्र में दिए गये कोई विवरण/तथ्य मिथ्या पाए जाते हैं, तो मेरे विरुद्ध भा.द.वि. 1960 की धारा 199 व 200 एवं प्रभावी किसी अन्य विधि के अंतर्गत अभियोजन एवं दण्ड के लिए स्वयं उत्तरदायी होऊंगा/होऊंगी।
+      </p>
+
+      <div class="flex justify-between mt-12">
+        <div>
+          <p>स्थान : <span id="p_place" class="filled-data"></span></p>
+          <p class="mt-3">दिनांक : <span id="p_date" class="filled-data"></span></p>
+        </div>
+
+        <div class="text-center">
+          <img id="signaturePreview" class="h-24 mx-auto mb-2" />
+          <p>आवेदक के हस्ताक्षर</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex gap-4 mt-6 justify-end">
+      <button onclick="downloadPDF()" class="bg-green-600 text-white px-5 py-2 rounded-lg">
+        Download JPEG
+      </button>
+
+      <button onclick="closePopup()" class="bg-red-500 text-white px-5 py-2 rounded-lg">
+        Close
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('signatureCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let drawing = false;
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mouseup', stopDraw);
+  canvas.addEventListener('mousemove', draw);
+
+  function startDraw(e) {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  }
+
+  function stopDraw() {
+    drawing = false;
+  }
+
+  function draw(e) {
+    if (!drawing) return;
+
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'black';
+
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  }
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function generateForm() {
+
+    document.getElementById('p_name').innerText = document.getElementById('name').value;
+    document.getElementById('p_father').innerText = document.getElementById('father').value;
+    document.getElementById('p_mother').innerText = document.getElementById('mother').value;
+    document.getElementById('p_dob').innerText = document.getElementById('dob').value;
+    document.getElementById('p_business').innerText = document.getElementById('business').value;
+    document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
+    document.getElementById('p_caste').innerText = document.getElementById('caste').value;
+    document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
+    document.getElementById('p_address').innerText = document.getElementById('address').value;
+    document.getElementById('p_police').innerText = document.getElementById('police').value;
+    document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
+    document.getElementById('p_district').innerText = document.getElementById('district').value;
+
+    document.getElementById('p_place').innerText = document.getElementById('district').value;
+
+    const today = new Date();
+    document.getElementById('p_date').innerText = today.toLocaleDateString('hi-IN');
+
+    const fileInput = document.getElementById('signatureUpload');
+    const signaturePreview = document.getElementById('signaturePreview');
+
+    if (fileInput.files && fileInput.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        signaturePreview.src = e.target.result;
+      }
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      signaturePreview.src = canvas.toDataURL();
+    }
+
+    document.getElementById('popup').style.display = 'flex';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  async function downloadPDF() {
+    const element = document.getElementById('printArea');
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff'
+    });
+
+    let quality = 0.75;
+    let blob = null;
+
+    async function createBlob(q) {
+      return await new Promise((resolve) => {
+        canvas.toBlob((b) => resolve(b), 'image/jpeg', q);
+      });
+    }
+
+    for (let i = 0; i < 40; i++) {
+      blob = await createBlob(quality);
+
+      if (!blob) break;
+
+      const size = blob.size;
+
+      if (size >= 90000 && size <= 95000) {
+        break;
+      }
+
+      if (size > 95000) {
+        quality -= 0.01;
+      } else {
+        quality += 0.01;
+      }
+    }
+
+    if (blob) {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'स्वप्रमाणित-घोषणा-पत्र.jpeg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      alert('Image download failed');
+    }
+  }
+
+  function resetForm() {
+    document.querySelectorAll('input').forEach(input => {
+      if (input.type !== 'file') {
+        input.value = '';
+      }
+    });
+
+    document.getElementById('signatureUpload').value = '';
+    clearCanvas();
+  }
+</script>
+
+</body>
+</html>
