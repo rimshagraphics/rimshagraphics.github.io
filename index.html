@@ -20,9 +20,21 @@
     }
     @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
 
-    * {
-      font-family: 'Kalam', cursive !important;
-    }
+   body,
+input,
+button,
+p,
+span,
+div{
+
+font-family:'Kalam',sans-serif;
+
+}
+    .filled-data{
+
+font-family:'Kalam',sans-serif !important;
+
+}
 
     body {
       font-family: 'Anek Devanagari', sans-serif;
@@ -197,8 +209,54 @@
   let drawing = false;
 
   canvas.addEventListener('mousedown', startDraw);
-  canvas.addEventListener('mouseup', stopDraw);
-  canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDraw);
+canvas.addEventListener('mousemove', draw);
+
+canvas.addEventListener('touchstart', function(e){
+
+e.preventDefault();
+
+drawing=true;
+
+const rect=canvas.getBoundingClientRect();
+
+ctx.beginPath();
+
+ctx.moveTo(
+e.touches[0].clientX-rect.left,
+e.touches[0].clientY-rect.top
+);
+
+});
+
+canvas.addEventListener('touchmove', function(e){
+
+if(!drawing)return;
+
+e.preventDefault();
+
+const rect=canvas.getBoundingClientRect();
+
+ctx.lineWidth=2;
+
+ctx.lineCap='round';
+
+ctx.strokeStyle='black';
+
+ctx.lineTo(
+e.touches[0].clientX-rect.left,
+e.touches[0].clientY-rect.top
+);
+
+ctx.stroke();
+
+});
+
+canvas.addEventListener('touchend', function(){
+
+drawing=false;
+
+});
 
   function startDraw(e) {
     drawing = true;
