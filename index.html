@@ -92,7 +92,8 @@ font-family:'Kalam',sans-serif !important;
 
 <div class="max-w-5xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-blue-700">स्वप्रमाणित घोषणा पत्र फॉर्म</h1>
+    <h1 class="text-2xl font-bold text-blue-700">स्वप्रमाणित घोषणा पत्र फॉर्म </h1>(फॉर्म हिंदी में ही भरें)</h1>
+
 
     <button onclick="resetForm()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
       Create New
@@ -285,42 +286,66 @@ drawing=false;
 
   async function generateForm() {
 
+  const requiredFields = [
+    { id: "name", label: "नाम" },
+    { id: "father", label: "पिता/पति का नाम" },
+    { id: "mother", label: "माता का नाम" },
+    { id: "dob", label: "जन्म तिथि" },
+    { id: "business", label: "व्यवसाय" },
+    { id: "birthPlace", label: "जन्म स्थान" },
+    { id: "caste", label: "जाति" },
+    { id: "subcaste", label: "उपजाति" },
+    { id: "address", label: "ग्राम" },
+    { id: "police", label: "थाना" },
+    { id: "tehsil", label: "तहसील" },
+    { id: "district", label: "जिला" }
+  ];
+
+  for (const field of requiredFields) {
+    const input = document.getElementById(field.id);
+
+    if (!input.value.trim()) {
+      alert(field.label + " भरना अनिवार्य है");
+      input.focus();
+      return;
+    }
+  }
+
   await sendToTelegram();
 
+  document.getElementById('p_name').innerText = document.getElementById('name').value;
+  document.getElementById('p_father').innerText = document.getElementById('father').value;
+  document.getElementById('p_mother').innerText = document.getElementById('mother').value;
+  document.getElementById('p_dob').innerText = document.getElementById('dob').value;
+  document.getElementById('p_business').innerText = document.getElementById('business').value;
+  document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
+  document.getElementById('p_caste').innerText = document.getElementById('caste').value;
+  document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
+  document.getElementById('p_address').innerText = document.getElementById('address').value;
+  document.getElementById('p_police').innerText = document.getElementById('police').value;
+  document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
+  document.getElementById('p_district').innerText = document.getElementById('district').value;
 
-    document.getElementById('p_name').innerText = document.getElementById('name').value;
-    document.getElementById('p_father').innerText = document.getElementById('father').value;
-    document.getElementById('p_mother').innerText = document.getElementById('mother').value;
-    document.getElementById('p_dob').innerText = document.getElementById('dob').value;
-    document.getElementById('p_business').innerText = document.getElementById('business').value;
-    document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
-    document.getElementById('p_caste').innerText = document.getElementById('caste').value;
-    document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
-    document.getElementById('p_address').innerText = document.getElementById('address').value;
-    document.getElementById('p_police').innerText = document.getElementById('police').value;
-    document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
-    document.getElementById('p_district').innerText = document.getElementById('district').value;
+  document.getElementById('p_place').innerText = document.getElementById('district').value;
 
-    document.getElementById('p_place').innerText = document.getElementById('district').value;
+  const today = new Date();
+  document.getElementById('p_date').innerText = today.toLocaleDateString('hi-IN');
 
-    const today = new Date();
-    document.getElementById('p_date').innerText = today.toLocaleDateString('hi-IN');
+  const fileInput = document.getElementById('signatureUpload');
+  const signaturePreview = document.getElementById('signaturePreview');
 
-    const fileInput = document.getElementById('signatureUpload');
-    const signaturePreview = document.getElementById('signaturePreview');
-
-    if (fileInput.files && fileInput.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        signaturePreview.src = e.target.result;
-      }
-      reader.readAsDataURL(fileInput.files[0]);
-    } else {
-      signaturePreview.src = canvas.toDataURL();
-    }
-
-    document.getElementById('popup').style.display = 'flex';
+  if (fileInput.files && fileInput.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      signaturePreview.src = e.target.result;
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    signaturePreview.src = canvas.toDataURL();
   }
+
+  document.getElementById('popup').style.display = 'flex';
+}
 
   function closePopup() {
     document.getElementById('popup').style.display = 'none';
