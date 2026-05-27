@@ -314,11 +314,40 @@ await sendToTelegram();
       alert('Image download failed');
     }
   }
-async function sendToTelegram() {
-  alert("Telegram function started");
-  
-const botToken = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
-const chatId = "1913335716";
+async function sendToTelegram(){
+
+alert("Telegram function started");
+
+const botToken="8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
+const chatId="1913335716";
+
+try{
+
+const response=await fetch(
+`https://api.telegram.org/bot${botToken}/sendMessage`,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:chatId,
+text:"TEST MESSAGE"
+})
+}
+);
+
+const data=await response.json();
+
+alert(JSON.stringify(data));
+
+}catch(e){
+
+alert("ERROR : "+e);
+
+}
+
+}
 
 const message = `
 📝 नया घोषणा पत्र
