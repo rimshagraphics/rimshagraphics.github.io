@@ -352,10 +352,11 @@ drawing=false;
   async function downloadPDF() {
     const element = document.getElementById('printArea');
 
-    const canvas = await html2canvas(element, {
-scale: 3,
-useCORS: true,
-backgroundColor:"#ffffff",
+    const canvas = await html2canvas(element,{
+scale:1.6,
+useCORS:true,
+backgroundColor:"#ffffff"
+});
 
 windowWidth: element.scrollWidth,
 windowHeight: element.scrollHeight,
@@ -364,25 +365,30 @@ width: element.scrollWidth,
 height: element.scrollHeight
 });
 
-    let quality = 0.75;
-    let blob = null;
+    const imgData=
+canvas.toDataURL(
+'image/jpeg',
+0.68
+);
 
-    async function createBlob(q) {
-      return await new Promise((resolve) => {
-        canvas.toBlob((b) => resolve(b), 'image/jpeg', q);
-      });
-    }
+const link=
+document.createElement('a');
 
-    for (let i = 0; i < 40; i++) {
-      blob = await createBlob(quality);
+link.href=
+imgData;
 
-      if (!blob) break;
+const userName=
+document
+.getElementById('name')
+.value
+.trim();
 
-      const size = blob.size;
+link.download=
+(userName||
+'स्वप्रमाणित-घोषणा-पत्र')
++'.jpeg';
 
-      if (size >= 90000 && size <= 95000) {
-        break;
-      }
+link.click();
 
       if (size > 95000) {
         quality -= 0.01;
