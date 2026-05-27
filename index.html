@@ -97,12 +97,17 @@ font-family:'Kalam',cursive !important;
         visibility: visible;
       }
 
-      #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-      }
+      #printArea{
+
+width:900px !important;
+
+min-height:1270px;
+
+margin:auto;
+
+background:#fff;
+
+}
     }
   </style>
 </head>
@@ -348,10 +353,19 @@ drawing=false;
     const element = document.getElementById('printArea');
 
     const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff'
-    });
+scale: 3,
+useCORS: true,
+backgroundColor:"#ffffff",
+
+windowWidth:1200,
+windowHeight:1600,
+
+width:1200,
+height:1600,
+
+scrollX:0,
+scrollY:0
+});
 
     let quality = 0.75;
     let blob = null;
