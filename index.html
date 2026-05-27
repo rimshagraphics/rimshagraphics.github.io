@@ -99,13 +99,9 @@ font-family:'Kalam',cursive !important;
 
       #printArea{
 
-width:900px;
+width:100%;
 
-height:auto;
-
-padding:30px;
-
-background:white;
+max-width:100%;
 
 }
     }
@@ -353,10 +349,40 @@ drawing=false;
     const element = document.getElementById('printArea');
 
     const canvas = await html2canvas(element,{
-scale:1.6,
+scale:2,
 useCORS:true,
-backgroundColor:"#ffffff"
+backgroundColor:"#ffffff",
+
+width:element.offsetWidth,
+height:element.offsetHeight,
+
+windowWidth:element.scrollWidth,
+windowHeight:element.scrollHeight
 });
+    const imgData =
+canvas.toDataURL(
+'image/jpeg',
+0.72
+);
+
+const link =
+document.createElement('a');
+
+link.href =
+imgData;
+
+const userName =
+document
+.getElementById('name')
+.value
+.trim();
+
+link.download =
+(userName ||
+'स्वप्रमाणित-घोषणा-पत्र')
++'.jpeg';
+
+link.click();
 
 windowWidth: element.scrollWidth,
 windowHeight: element.scrollHeight,
