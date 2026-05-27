@@ -316,14 +316,12 @@ await sendToTelegram();
   }
 async function sendToTelegram(){
 
-alert("Telegram function started");
-
 const botToken="8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
 const chatId="1913335716";
 
 try{
 
-const response=await fetch(
+await fetch(
 `https://api.telegram.org/bot${botToken}/sendMessage`,
 {
 method:"POST",
@@ -337,18 +335,13 @@ text:"TEST MESSAGE"
 }
 );
 
-const data=await response.json();
-
-alert(JSON.stringify(data));
-
 }catch(e){
 
-alert("ERROR : "+e);
+console.log(e);
 
 }
 
 }
-
 const message = `
 📝 नया घोषणा पत्र
 
