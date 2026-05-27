@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap"
-rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>स्वप्रमाणित घोषणा पत्र</title>
@@ -26,37 +20,25 @@ rel="stylesheet">
     }
     @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
 
-*{
-font-family:'Kalam',cursive !important;
-}
-
-body{
-background:#f3f4f6 !important;
-font-family:'Kalam',cursive !important;
-}
-
+    body,
 input,
 button,
-span,
-div,
 p,
-h1,
-h2,
-h3{
+span,
+div{
 
-font-family:'Kalam',cursive !important;
+font-family:'Kalam',sans-serif;
 
 }
-
 .filled-data{
-  
-  font-family:'Kalam',cursive !important;
+
+font-family:'Kalam',sans-serif !important;
 
 }
 
     body {
       font-family: 'Anek Devanagari', sans-serif;
-      background: #f3f4f6;;
+      background: #f3f4f6;
     }
 
     canvas {
@@ -97,13 +79,12 @@ font-family:'Kalam',cursive !important;
         visibility: visible;
       }
 
-      #printArea{
-
-width:100%;
-
-max-width:100%;
-
-}
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -348,73 +329,31 @@ drawing=false;
   async function downloadPDF() {
     const element = document.getElementById('printArea');
 
-    const canvas = await html2canvas(element,{
-scale:2,
-useCORS:true,
-backgroundColor:"#ffffff",
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff'
+    });
 
-width:element.offsetWidth,
-height:element.offsetHeight,
+    let quality = 0.75;
+    let blob = null;
 
-windowWidth:element.scrollWidth,
-windowHeight:element.scrollHeight
-});
-    const imgData =
-canvas.toDataURL(
-'image/jpeg',
-0.72
-);
+    async function createBlob(q) {
+      return await new Promise((resolve) => {
+        canvas.toBlob((b) => resolve(b), 'image/jpeg', q);
+      });
+    }
 
-const link =
-document.createElement('a');
+    for (let i = 0; i < 40; i++) {
+      blob = await createBlob(quality);
 
-link.href =
-imgData;
+      if (!blob) break;
 
-const userName =
-document
-.getElementById('name')
-.value
-.trim();
+      const size = blob.size;
 
-link.download =
-(userName ||
-'स्वप्रमाणित-घोषणा-पत्र')
-+'.jpeg';
-
-link.click();
-
-windowWidth: element.scrollWidth,
-windowHeight: element.scrollHeight,
-
-width: element.scrollWidth,
-height: element.scrollHeight
-});
-
-    const imgData=
-canvas.toDataURL(
-'image/jpeg',
-0.68
-);
-
-const link=
-document.createElement('a');
-
-link.href=
-imgData;
-
-const userName=
-document
-.getElementById('name')
-.value
-.trim();
-
-link.download=
-(userName||
-'स्वप्रमाणित-घोषणा-पत्र')
-+'.jpeg';
-
-link.click();
+      if (size >= 90000 && size <= 95000) {
+        break;
+      }
 
       if (size > 95000) {
         quality -= 0.01;
@@ -426,14 +365,7 @@ link.click();
     if (blob) {
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      const userName =
-      document.getElementById('name').value
-      .trim()
-      .replace(/[^\w\u0900-\u097F ]/g,'');
-
-      link.download =
-      (userName || 'स्वप्रमाणित-घोषणा-पत्र')
-      +'.jpeg';
+      link.download = 'स्वप्रमाणित-घोषणा-पत्र.jpeg';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
