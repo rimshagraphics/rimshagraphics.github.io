@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rimsha Graphics - Digital Form Portal</title>
   
-  <!-- गूगल एडसेंस कोड (Google AdSense Code Integrated Here) -->
+  <!-- गूगल एडसेंस कोड -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2674528008442854"
        crossorigin="anonymous"></script>
 
@@ -156,14 +156,14 @@
             <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
               <div class="flex items-center gap-4">
                 <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">02</span>
-                <p class="text-slate-700 text-sm font-medium">पॉपअप में पूछी गई जानकारियों को English में टाइप करें, नीचे एक <strong>लाइव सजेशन बॉक्स</strong> खुलेगा जिससे आप सही वर्तनी चुन सकते हैं।</p>
+                <p class="text-slate-700 text-sm font-medium">पॉपअप में पूछी गई जानकारियों को English में टाइप करें, नीचे आ रहे सुझाव से <strong class="text-red-600">हिंदी चुनें</strong>। (फॉर्म केवल हिंदी में ही स्वीकृत होगा)</p>
               </div>
             </div>
 
             <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
               <div class="flex items-center gap-4">
                 <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">03</span>
-                <p class="text-slate-700 text-sm font-medium">सावधानी के साथ भरें। एक बार भरा गया इनपुट, हमेशा पता, <span class="text-purple-600 font-semibold">जन्मतिथि/आधार</span> से मिलान होना आवश्यक है।</p>
+                <p class="text-slate-700 text-sm font-medium">स्क्रीन पर हस्ताक्षर करें या फोटो अपलोड करें। <strong class="text-purple-600">(दोनों में से एक अनिवार्य है)</strong></p>
               </div>
             </div>
 
@@ -225,8 +225,8 @@
           </div>
           <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
             <div class="flex-1 flex justify-between items-center text-sm">
-              <span class="text-slate-300">इनपुट सिस्टम:</span>
-              <span class="bg-orange-500 text-white px-3 py-1 rounded-xl text-xs font-bold">Google Transliteration</span>
+              <span class="text-slate-300">इनपुट भाषा:</span>
+              <span class="bg-red-500 text-white px-3 py-1 rounded-xl text-xs font-bold">केवल हिंदी (Strict)</span>
             </div>
           </div>
         </div>
@@ -252,7 +252,7 @@
 
       <div class="p-6 space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">नाम</label><input type="text" id="name" placeholder="English में टाइप करें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-name" class="suggestion-box"></div></div>
+          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">नाम</label><input type="text" id="name" placeholder="हिंदी में भरें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-name" class="suggestion-box"></div></div>
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">पुत्र/पुत्री/पति श्री</label><input type="text" id="father" placeholder="पिता/पति का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-father" class="suggestion-box"></div></div>
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">माता श्रीमती</label><input type="text" id="mother" placeholder="माता का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-mother" class="suggestion-box"></div></div>
           <div><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जन्म तिथि</label><input type="date" id="dob" class="border border-slate-200 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></div>
@@ -436,9 +436,11 @@
       }
     });
 
+    // --- 2. सिग्नेचर कैनवास सिस्टम ट्रैकिंग के साथ ---
     const cvs = document.getElementById('signatureCanvas');
     const gl = cvs.getContext('2d');
     let isDrawing = false;
+    let isCanvasDrawn = false; // ट्रैक करेगा कि कैनवास पर कुछ ड्रा हुआ है या नहीं
 
     gl.lineWidth = 2.5;
     gl.lineCap = 'round';
@@ -454,6 +456,7 @@
 
     cvs.addEventListener('mousedown', (e) => {
       isDrawing = true;
+      isCanvasDrawn = true;
       gl.beginPath();
       gl.moveTo(e.offsetX, e.offsetY);
     });
@@ -470,6 +473,7 @@
       gl.beginPath();
       gl.moveTo(p.x, p.y);
       isDrawing = true;
+      isCanvasDrawn = true;
     }, { passive: false });
 
     cvs.addEventListener('touchmove', (e) => {
@@ -485,11 +489,18 @@
       isDrawing = false;
     }, { passive: false });
 
-    function clearCanvas() { gl.clearRect(0, 0, cvs.width, cvs.height); }
+    function clearCanvas() { 
+      gl.clearRect(0, 0, cvs.width, cvs.height); 
+      isCanvasDrawn = false; // कैनवास क्लियर होने पर रीसेट
+    }
 
     function openFormModal() { document.getElementById('formModal').style.display = 'flex'; }
     function closeFormModal() { document.getElementById('formModal').style.display = 'none'; }
     function closeResultModal() { document.getElementById('resultModal').style.display = 'none'; }
+
+    function containsEnglish(text) {
+      return /[a-zA-Z]/.test(text);
+    }
 
     async function submitDataAndGenerate() {
       const fields = [
@@ -501,6 +512,7 @@
         { id: "tehsil", title: "तहसील" }, { id: "district", title: "जिला" }
       ];
 
+      // 1. खाली फ़ील्ड चेक
       for (const f of fields) {
         const node = document.getElementById(f.id);
         if (!node.value.trim()) {
@@ -508,6 +520,26 @@
           node.focus();
           return;
         }
+      }
+
+      // 2. सिर्फ हिंदी वैलिडेशन चेक
+      for (const f of fields) {
+        if (f.id === "dob") continue;
+        const node = document.getElementById(f.id);
+        if (containsEnglish(node.value)) {
+          alert(`कृपया "${f.title}" को सिर्फ हिंदी में ही भरें!\n\n(संकेत: टाइप करके स्पेस दबाएँ या दिए गए सुझाव में से हिंदी चुनें।)`);
+          node.focus();
+          return;
+        }
+      }
+
+      // 3. हस्ताक्षर वैलिडेशन चेक (Draw या Upload में से एक होना अनिवार्य)
+      const uploader = document.getElementById('signatureUpload');
+      const hasUploadedFile = uploader.files && uploader.files[0];
+
+      if (!isCanvasDrawn && !hasUploadedFile) {
+        alert("कृपया हस्ताक्षर करें या हस्ताक्षर की इमेज अपलोड करें!");
+        return;
       }
 
       await sendToTelegram();
@@ -535,10 +567,9 @@
       const rightNow = new Date();
       document.getElementById('p_date').innerText = rightNow.toLocaleDateString('hi-IN');
 
-      const uploader = document.getElementById('signatureUpload');
       const previewImg = document.getElementById('signaturePreview');
 
-      if (uploader.files && uploader.files[0]) {
+      if (hasUploadedFile) {
         const reader = new FileReader();
         reader.onload = function(ev) { previewImg.src = ev.target.result; };
         reader.readAsDataURL(uploader.files[0]);
