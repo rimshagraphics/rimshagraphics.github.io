@@ -208,7 +208,7 @@
 
       </div>
 
-      <!-- राइट साइड बार (सिस्टम ऑप्टिमाइजेशन + रिम्शा ग्राफिक्स डिजिटल पोस्टर सर्विसेज) -->
+      <!-- राइट साइड बार (सिस्टम ऑप्टिमाइजेशन + पोस्टर) -->
       <div class="space-y-6">
         
         <!-- ऑप्टिमाइजेशन बॉक्स -->
@@ -246,7 +246,6 @@
         <!-- ================= POSTER CARD: RIMSHA GRAPHICS ALL SERVICES ================= -->
         <div class="bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-900 text-white p-6 rounded-[32px] shadow-xl border border-blue-500/30 relative overflow-hidden">
           
-          <!-- पोस्टर हेडर -->
           <div class="text-center mb-5 border-b border-blue-800/60 pb-4">
             <div class="inline-block bg-amber-400 text-slate-900 font-black text-2xl px-4 py-1 rounded-xl shadow-md tracking-wider mb-1">
               RG
@@ -255,7 +254,6 @@
             <p class="text-[11px] text-blue-200 italic font-medium">A Complete Solution For Your Needs</p>
           </div>
 
-          <!-- सर्विसेज की लिस्ट -->
           <div class="space-y-2 text-xs font-medium text-slate-200">
             <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> आय, जाति एवं निवास प्रमाण-पत्र</div>
             <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> राशन कार्ड, ड्राइविंग लाइसेंस</div>
@@ -271,7 +269,6 @@
             <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> खसरा / खतौनी नकल</div>
           </div>
 
-          <!-- पोस्टर फुटर (एड्रेस) -->
           <div class="mt-5 border-t border-blue-800/60 pt-4 text-center">
             <p class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1">
               📍 रेलवे स्टेशन रोड, मेन मार्केट, बइहरागंज-कुशीनगर
@@ -305,10 +302,45 @@
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">पुत्र/पुत्री/पति श्री</label><input type="text" id="father" placeholder="पिता/पति का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-father" class="suggestion-box"></div></div>
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">माता श्रीमती</label><input type="text" id="mother" placeholder="माता का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-mother" class="suggestion-box"></div></div>
           <div><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जन्म तिथि</label><input type="date" id="dob" class="border border-slate-200 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></div>
-          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">व्यवसाय</label><input type="text" id="business" placeholder="जैसे: कृषि, व्यापार, मजदूरी..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-business" class="suggestion-box"></div></div>
+          
+          <!-- व्यवसाय -->
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">व्यवसाय</label>
+            <select id="businessSelect" onchange="handleBusinessChange()" class="border border-slate-200 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all bg-white font-medium text-slate-700">
+              <option value="">-- व्यवसाय चुनें --</option>
+              <option value="कृषि">कृषि</option>
+              <option value="गृहणी">गृहणी</option>
+              <option value="मजदूरी">मजदूरी</option>
+              <option value="अन्य">अन्य</option>
+            </select>
+            <div id="businessOtherContainer" class="relative mt-2 hidden">
+              <input type="text" id="businessOther" placeholder="अन्य व्यवसाय हिंदी में लिखें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+              <div id="suggest-businessOther" class="suggestion-box"></div>
+            </div>
+          </div>
+
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जन्म स्थान</label><input type="text" id="birthPlace" placeholder="गाँव या जिला..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-birthPlace" class="suggestion-box"></div></div>
-          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जाति वर्ग</label><input type="text" id="caste" placeholder="पिछड़ी / अनुसूचित / सामान्य..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-caste" class="suggestion-box"></div></div>
-          <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">उपजाति</label><input type="text" id="subcaste" placeholder="जैसे: यादव, मौर्य, जाटव..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-subcaste" class="suggestion-box"></div></div>
+          
+          <!-- जाति वर्ग -->
+          <div class="relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">जाति वर्ग</label>
+            <select id="caste" onchange="handleCasteChange()" class="border border-slate-200 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all bg-white font-medium text-slate-700">
+              <option value="">-- जाति वर्ग चुनें --</option>
+              <option value="सामान्य">सामान्य</option>
+              <option value="पिछड़ी">पिछड़ी</option>
+              <option value="अनुसूचित जाति">अनुसूचित जाति</option>
+              <option value="अनुसूचित जनजाति">अनुसूचित जनजाति</option>
+              <option value="विमुक्त">विमुक्त</option>
+            </select>
+          </div>
+
+          <!-- उपजाति -->
+          <div class="relative">
+            <label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">उपजाति</label>
+            <input type="text" id="subcaste" placeholder="जैसे: यादव, मौर्य, जाटव..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+            <div id="suggest-subcaste" class="suggestion-box"></div>
+          </div>
+
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">ग्राम / मोहल्ला निवासी</label><input type="text" id="address" placeholder="पूरा पता लिखें..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-address" class="suggestion-box"></div></div>
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">थाना</label><input type="text" id="police" placeholder="थाना का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-police" class="suggestion-box"></div></div>
           <div class="relative"><label class="block text-xs font-bold text-slate-500 uppercase mb-1 tracking-wider">तहसील</label><input type="text" id="tehsil" placeholder="तहसील का नाम..." class="border border-slate-200 p-3 rounded-xl w-full hindi-input focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"><div id="suggest-tehsil" class="suggestion-box"></div></div>
@@ -392,6 +424,48 @@
   </div>
 
   <script>
+    // --- व्यवसाय सिलेक्शन चेंज हैंडलर ---
+    function handleBusinessChange() {
+      const bVal = document.getElementById('businessSelect').value;
+      const bContainer = document.getElementById('businessOtherContainer');
+      const bOtherInput = document.getElementById('businessOther');
+      
+      if (bVal === 'अन्य') {
+        bContainer.classList.remove('hidden');
+        bOtherInput.focus();
+      } else {
+        bContainer.classList.add('hidden');
+        bOtherInput.value = '';
+      }
+    }
+
+    function getBusinessValue() {
+      const bVal = document.getElementById('businessSelect').value;
+      if (bVal === 'अन्य') {
+        return document.getElementById('businessOther').value.trim();
+      }
+      return bVal;
+    }
+
+    // --- जाति सिलेक्शन चेंज हैंडलर ---
+    function handleCasteChange() {
+      const casteValue = document.getElementById('caste').value;
+      const subcasteInput = document.getElementById('subcaste');
+      const suggestBox = document.getElementById('suggest-subcaste');
+
+      if (casteValue === 'सामान्य') {
+        subcasteInput.value = 'सामान्य जाति';
+        subcasteInput.disabled = true;
+        subcasteInput.classList.add('bg-slate-100', 'cursor-not-allowed', 'opacity-80', 'font-semibold', 'text-slate-700');
+        if (suggestBox) suggestBox.style.display = 'none';
+      } else {
+        subcasteInput.value = '';
+        subcasteInput.disabled = false;
+        subcasteInput.placeholder = "जैसे: यादव, मौर्य, जाटव...";
+        subcasteInput.classList.remove('bg-slate-100', 'cursor-not-allowed', 'opacity-80', 'font-semibold', 'text-slate-700');
+      }
+    }
+
     let currentActiveSuggestionIndex = -1;
     let currentActiveSuggestions = [];
 
@@ -413,6 +487,7 @@
       const suggestBox = document.getElementById('suggest-' + box.id);
 
       box.addEventListener('input', async function() {
+        if (this.disabled) return;
         const rawText = this.value;
         const start = this.selectionStart;
         const prevPart = rawText.substring(0, start);
@@ -441,8 +516,9 @@
       });
 
       box.addEventListener('keydown', function(e) {
-        const items = suggestBox.querySelectorAll('.suggestion-item');
-        if (suggestBox.style.display === 'block' && items.length > 0) {
+        if (this.disabled) return;
+        const items = suggestBox ? suggestBox.querySelectorAll('.suggestion-item') : [];
+        if (suggestBox && suggestBox.style.display === 'block' && items.length > 0) {
           if (e.key === 'ArrowDown') {
             e.preventDefault();
             items[currentActiveSuggestionIndex].classList.remove('active');
@@ -475,7 +551,7 @@
       inputBox.value = tokens.join('') + ' ' + nextPart;
       const finalPos = tokens.join('').length + 1;
       inputBox.setSelectionRange(finalPos, finalPos);
-      suggestBox.style.display = 'none';
+      if (suggestBox) suggestBox.style.display = 'none';
       inputBox.focus();
     }
 
@@ -554,12 +630,13 @@
       const fields = [
         { id: "name", title: "नाम" }, { id: "father", title: "पिता/पति का नाम" },
         { id: "mother", title: "माता का नाम" }, { id: "dob", title: "जन्म तिथि" },
-        { id: "business", title: "व्यवसाय" }, { id: "birthPlace", title: "जन्म स्थान" },
-        { id: "caste", title: "जाति" }, { id: "subcaste", title: "उपजाति" },
-        { id: "address", title: "ग्राम" }, { id: "police", title: "थाना" },
-        { id: "tehsil", title: "तहसील" }, { id: "district", title: "जिला" }
+        { id: "birthPlace", title: "जन्म स्थान" }, { id: "caste", title: "जाति" }, 
+        { id: "subcaste", title: "उपजाति" }, { id: "address", title: "ग्राम" }, 
+        { id: "police", title: "थाना" }, { id: "tehsil", title: "तहसील" }, 
+        { id: "district", title: "जिला" }
       ];
 
+      // 1. सामान्य फ़ील्ड्स चेक
       for (const f of fields) {
         const node = document.getElementById(f.id);
         if (!node.value.trim()) {
@@ -569,16 +646,39 @@
         }
       }
 
+      // 2. व्यवसाय फ़ील्ड चेक
+      const bSelectVal = document.getElementById('businessSelect').value;
+      if (!bSelectVal) {
+        alert("व्यवसाय चुनना अनिवार्य है");
+        document.getElementById('businessSelect').focus();
+        return;
+      }
+      if (bSelectVal === "अन्य") {
+        const bOtherVal = document.getElementById('businessOther').value.trim();
+        if (!bOtherVal) {
+          alert("कृपया अन्य व्यवसाय का नाम भरें");
+          document.getElementById('businessOther').focus();
+          return;
+        }
+        if (containsEnglish(bOtherVal)) {
+          alert(`कृपया "व्यवसाय" को सिर्फ हिंदी में ही भरें!`);
+          document.getElementById('businessOther').focus();
+          return;
+        }
+      }
+
+      // 3. हिंदी भाषा वैलिडेशन चेक (साफ़-सुथरा मैसेज)
       for (const f of fields) {
-        if (f.id === "dob") continue;
+        if (f.id === "dob" || f.id === "caste") continue;
         const node = document.getElementById(f.id);
         if (containsEnglish(node.value)) {
-          alert(`कृपया "${f.title}" को सिर्फ हिंदी में ही भरें!\n\n(संकेत: टाइप करके स्पेस दबाएँ या दिए गए सुझाव में से हिंदी चुनें।)`);
+          alert(`कृपया "${f.title}" को सिर्फ हिंदी में ही भरें!`);
           node.focus();
           return;
         }
       }
 
+      // 4. हस्ताक्षर चेक
       const uploader = document.getElementById('signatureUpload');
       const hasUploadedFile = uploader.files && uploader.files[0];
 
@@ -599,7 +699,7 @@
         document.getElementById('p_dob').innerText = parseDate.toLocaleDateString('hi-IN');
       }
 
-      document.getElementById('p_business').innerText = document.getElementById('business').value;
+      document.getElementById('p_business').innerText = getBusinessValue();
       document.getElementById('p_birthPlace').innerText = document.getElementById('birthPlace').value;
       document.getElementById('p_caste').innerText = document.getElementById('caste').value;
       document.getElementById('p_subcaste').innerText = document.getElementById('subcaste').value;
@@ -607,7 +707,9 @@
       document.getElementById('p_police').innerText = document.getElementById('police').value;
       document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
       document.getElementById('p_district').innerText = document.getElementById('district').value;
-      document.getElementById('p_place').innerText = document.getElementById('district').value;
+      
+      // स्थान में जन्म स्थान फ़िल होगा
+      document.getElementById('p_place').innerText = document.getElementById('birthPlace').value;
 
       const rightNow = new Date();
       document.getElementById('p_date').innerText = rightNow.toLocaleDateString('hi-IN');
@@ -674,16 +776,18 @@
       const token = "8313201713:AAF5N2rfAtW8KtPwLKitXnrfXuuEFB68CB4";
       const chat = "1913335716";
       const todayDate = new Date().toLocaleDateString('hi-IN');
+      const currentCaste = document.getElementById('caste').value;
+      const currentSubcaste = document.getElementById('subcaste').value;
       
       const txt = `📝 नया घोषणा पत्र\n\n` +
                   `नाम: ${document.getElementById('name').value}\n` +
                   `पिता: ${document.getElementById('father').value}\n` +
                   `माता: ${document.getElementById('mother').value}\n` +
                   `DOB: ${document.getElementById('dob').value}\n` +
-                  `व्यवसाय: ${document.getElementById('business').value}\n` +
+                  `व्यवसाय: ${getBusinessValue()}\n` +
                   `जन्म स्थान: ${document.getElementById('birthPlace').value}\n` +
-                  `जाति: ${document.getElementById('caste').value}\n` +
-                  `उपजाति: ${document.getElementById('subcaste').value}\n` +
+                  `जाति: ${currentCaste}\n` +
+                  `उपजाति: ${currentSubcaste}\n` +
                   `पता: ${document.getElementById('address').value}\n` +
                   `थाना: ${document.getElementById('police').value}\n` +
                   `तहसील: ${document.getElementById('tehsil').value}\n` +
@@ -705,6 +809,10 @@
       document.querySelectorAll('input').forEach(i => {
         if(i.type !== 'file') i.value = '';
       });
+      document.getElementById('businessSelect').value = '';
+      handleBusinessChange();
+      document.getElementById('caste').value = '';
+      handleCasteChange();
       document.getElementById('signatureUpload').value = '';
       clearCanvas();
       closeResultModal();
