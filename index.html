@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rimsha Graphics - Digital Form Portal</title>
+  <title>Rimsha Graphics - Self Declaration Form Generator & Digital Portal</title>
+  <meta name="description" content="निःशुल्क स्वप्रमाणित घोषणा पत्र जनरेटर। आय, जाति और निवास प्रमाण पत्र हेतु 100KB से कम साइज़ में घोषणा पत्र बनाएँ।">
   
   <!-- गूगल एडसेंस कोड -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2674528008442854"
@@ -53,7 +54,7 @@
     }
 
     .modal-content {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       width: 100%;
       max-width: 850px;
       max-height: 90vh;
@@ -94,191 +95,240 @@
     }
   </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col justify-between">
 
-  <!-- हेडर नेविगेशन -->
-  <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-20 items-center">
-        <div class="flex items-center gap-4">
-          <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-xl font-extrabold h-12 w-12 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-            RG
-          </div>
-          <div>
-            <span class="text-2xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent tracking-tight block drop-shadow-sm">Rimsha Graphics</span>
-            <span class="text-xs text-slate-400 font-semibold tracking-wider uppercase">Digital Form Portal v2.0</span>
-          </div>
-        </div>
-        <div>
-          <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm border border-emerald-100">
-            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> System Live
-          </span>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- मुख्य डैशबोर्ड -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-      
-      <!-- लेफ्ट सेक्शन -->
-      <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-slate-100">
-        <div class="flex items-start gap-4 mb-6">
-          <div class="bg-blue-50 p-4 rounded-2xl text-blue-600">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-          </div>
-          <div>
-            <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">स्वप्रमाणित घोषणा पत्र मैनेजमेंट सिस्टम</h2>
-            <div class="h-1.5 w-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mt-2"></div>
-          </div>
-        </div>
-
-        <p class="text-slate-600 text-[15px] leading-relaxed mb-8">
-          यह वेबसाइट आय, जाति और निवास प्रमाण-पत्रों के लिए आवश्यक स्वप्रमाणित घोषणा पत्र <span class="text-blue-600 font-bold">(Self Declaration Form)</span> जनरेट करने की एक सुरक्षित और तेज़ सुविधा प्रदान करता है।
-        </p>
-
-        <!-- निर्देश सूची -->
-        <div class="border-t border-slate-100 pt-6">
-          <div class="flex items-center gap-2 mb-6">
-            <span class="text-xl">💡</span>
-            <h3 class="text-[16px] font-bold text-blue-700">फॉर्म बनाने का सही तरीका और निर्देश:</h3>
-          </div>
-
-          <div class="space-y-4">
-            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
-              <div class="flex items-center gap-4">
-                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">01</span>
-                <p class="text-slate-700 text-sm font-medium">नीचे दिए गए <strong class="text-blue-600">"Generate Declaration Form"</strong> बटन पर क्लिक करें, जिससे डेटा एंट्री विंडो (Popup) खुल जाएगी।</p>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
-              <div class="flex items-center gap-4">
-                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">02</span>
-                <p class="text-slate-700 text-sm font-medium">पॉपअप में पूछी गई जानकारियों को English में टाइप करें, नीचे आ रहे सुझाव से <strong class="text-red-600">हिंदी चुनें</strong>। (फॉर्म केवल हिंदी में ही स्वीकृत होगा)</p>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
-              <div class="flex items-center gap-4">
-                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">03</span>
-                <p class="text-slate-700 text-sm font-medium">स्क्रीन पर हस्ताक्षर करें या फोटो अपलोड करें। <strong class="text-purple-600">(दोनों में से एक अनिवार्य है)</strong></p>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
-              <div class="flex items-center gap-4">
-                <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">04</span>
-                <p class="text-slate-700 text-sm font-medium">डेटा सबमिट करते ही आपका घोषणा पत्र तैयार हो जाएगा। फॉर्म डाउनलोड करें और इसे <strong class="text-blue-600">e-District</strong> पर अपलोड करने में उपयोग करें।</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- बिग जनरेट बटन -->
-        <div class="mt-8 flex justify-center">
-          <button onclick="openFormModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-12 py-5 rounded-[22px] font-bold shadow-xl shadow-blue-500/20 hover:opacity-95 transition-all text-xl group">
-            <span class="bg-white/20 p-2 rounded-full text-white">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-            </span>
-            Generate Declaration Form
-            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
-          </button>
-        </div>
-
-        <!-- ================= हमसे संपर्क करें ================= -->
-        <div class="mt-8 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-6 rounded-2xl border border-blue-100">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-xl">📞</span>
-            <h3 class="text-base font-bold text-blue-900">Contact Us - हमसे संपर्क करें</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-4">यदि आपको फॉर्म भरने या किसी अन्य सेवा में सहायता चाहिए, तो हमसे सीधे संपर्क करें:</p>
-
-          <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-700">
-            <a href="https://wa.me/917379412164" target="_blank" class="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2.5 rounded-xl shadow-sm hover:bg-emerald-600 transition-all">
-              <span>💬 WhatsApp: +91 7379412164</span>
-            </a>
-            <a href="mailto:rimshagraphics2017@gmail.com" class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all">
-              <span class="text-blue-600">✉️ Email:</span>
-              <span>rimshagraphics2017@gmail.com</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- राइट साइड बार (सिस्टम ऑप्टिमाइजेशन + पोस्टर) -->
-      <div class="space-y-6">
-        
-        <!-- ऑप्टिमाइजेशन बॉक्स -->
-        <div class="bg-gradient-to-br from-[#0b132b] via-[#1c2541] to-[#3a506b] text-white p-6 rounded-[32px] shadow-xl relative overflow-hidden">
-          <div class="flex justify-between items-start mb-4">
-            <div>
-              <span class="text-xs font-semibold text-indigo-300 uppercase tracking-widest block mb-1">सिस्टम ऑप्टिमाइजेशन</span>
-              <h3 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-300 tracking-tight">Auto-Optimization</h3>
-            </div>
-            <span class="text-3xl">🚀</span>
-          </div>
-
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
-              <div class="flex-1 flex justify-between items-center text-xs">
-                <span class="text-slate-300">टारगेट फ़ाइल साइज़:</span>
-                <span class="bg-indigo-600/50 text-indigo-200 px-2.5 py-0.5 rounded-lg font-bold">≤ 100 KB</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
-              <div class="flex-1 flex justify-between items-center text-xs">
-                <span class="text-slate-300">आउटपुट फॉर्मेट:</span>
-                <span class="bg-emerald-600/50 text-emerald-200 px-2.5 py-0.5 rounded-lg font-bold">JPEG Image</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
-              <div class="flex-1 flex justify-between items-center text-xs">
-                <span class="text-slate-300">इनपुट भाषा:</span>
-                <span class="bg-red-500 text-white px-2.5 py-0.5 rounded-lg font-bold">केवल हिंदी (Strict)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ================= POSTER CARD: RIMSHA GRAPHICS ALL SERVICES ================= -->
-        <div class="bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-900 text-white p-6 rounded-[32px] shadow-xl border border-blue-500/30 relative overflow-hidden">
-          
-          <div class="text-center mb-5 border-b border-blue-800/60 pb-4">
-            <div class="inline-block bg-amber-400 text-slate-900 font-black text-2xl px-4 py-1 rounded-xl shadow-md tracking-wider mb-1">
+  <div>
+    <!-- हेडर नेविगेशन -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div class="flex items-center gap-4">
+            <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-xl font-extrabold h-12 w-12 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
               RG
             </div>
-            <h3 class="text-xl font-extrabold text-amber-300 tracking-wide uppercase">Rimsha Graphics</h3>
-            <p class="text-[11px] text-blue-200 italic font-medium">A Complete Solution For Your Needs</p>
+            <div>
+              <span class="text-2xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent tracking-tight block drop-shadow-sm">Rimsha Graphics</span>
+              <span class="text-xs text-slate-400 font-semibold tracking-wider uppercase">Digital Form Portal v2.0</span>
+            </div>
           </div>
-
-          <div class="space-y-2 text-xs font-medium text-slate-200">
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> आय, जाति एवं निवास प्रमाण-पत्र</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> राशन कार्ड, ड्राइविंग लाइसेंस</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> छात्रवृत्ति ऑनलाइन / नवीनीकरण</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> वोटर कार्ड ऑनलाइन / संशोधन</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> पैन कार्ड / आधार कार्ड सेवाएं</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> एल.आई.सी. प्रीमियम भुगतान</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> शादी कार्ड, विजिटिंग कार्ड डिज़ाइन</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> हैण्डबिल, स्कूल आई.डी. कार्ड</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> बैनर / फ्लेक्स, कैश मेमो डिज़ाइन</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> हिन्दी, अंग्रेजी एवं उर्दू टाइपिंग</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> रेल टिकट, एयर टिकट बुकिंग</div>
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> खसरा / खतौनी नकल</div>
+          <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-600">
+            <button onclick="openInfoModal('aboutModal')" class="hover:text-blue-600 transition-colors">About Us</button>
+            <button onclick="openInfoModal('policyModal')" class="hover:text-blue-600 transition-colors">Privacy Policy</button>
+            <button onclick="openInfoModal('termsModal')" class="hover:text-blue-600 transition-colors">Terms & Conditions</button>
           </div>
-
-          <div class="mt-5 border-t border-blue-800/60 pt-4 text-center">
-            <p class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1">
-              📍 रेलवे स्टेशन रोड, मेन मार्केट, बइहरागंज-कुशीनगर
-            </p>
+          <div>
+            <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm border border-emerald-100">
+              <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> System Live
+            </span>
           </div>
         </div>
-
       </div>
+    </nav>
+
+    <!-- मुख्य डैशबोर्ड -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        
+        <!-- लेफ्ट सेक्शन -->
+        <div class="lg:col-span-2 space-y-8">
+          
+          <div class="bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-slate-100">
+            <div class="flex items-start gap-4 mb-6">
+              <div class="bg-blue-50 p-4 rounded-2xl text-blue-600">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              </div>
+              <div>
+                <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">स्वप्रमाणित घोषणा पत्र मैनेजमेंट सिस्टम</h1>
+                <div class="h-1.5 w-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mt-2"></div>
+              </div>
+            </div>
+
+            <p class="text-slate-600 text-[15px] leading-relaxed mb-8">
+              यह पोर्टल आय, जाति और निवास प्रमाण-पत्रों के लिए आवश्यक स्वप्रमाणित घोषणा पत्र <span class="text-blue-600 font-bold">(Self Declaration Form)</span> जनरेट करने की एक डिजिटल, सुरक्षित और तेज़ सुविधा प्रदान करता है।
+            </p>
+
+            <!-- निर्देश सूची -->
+            <div class="border-t border-slate-100 pt-6">
+              <div class="flex items-center gap-2 mb-6">
+                <span class="text-xl">💡</span>
+                <h3 class="text-[16px] font-bold text-blue-700">फॉर्म बनाने का सही तरीका और निर्देश:</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+                  <div class="flex items-center gap-4">
+                    <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">01</span>
+                    <p class="text-slate-700 text-sm font-medium">नीचे दिए गए <strong class="text-blue-600">"Generate Declaration Form"</strong> बटन पर क्लिक करें, जिससे डेटा एंट्री विंडो (Popup) खुल जाएगी।</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+                  <div class="flex items-center gap-4">
+                    <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">02</span>
+                    <p class="text-slate-700 text-sm font-medium">पॉपअप में पूछी गई जानकारियों को English में टाइप करें, नीचे आ रहे सुझाव से <strong class="text-red-600">हिंदी चुनें</strong>। (फॉर्म केवल हिंदी में ही स्वीकृत होगा)</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+                  <div class="flex items-center gap-4">
+                    <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">03</span>
+                    <p class="text-slate-700 text-sm font-medium">स्क्रीन पर हस्ताक्षर करें या फोटो अपलोड करें। <strong class="text-purple-600">(दोनों में से एक अनिवार्य है)</strong></p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/80">
+                  <div class="flex items-center gap-4">
+                    <span class="h-8 w-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">04</span>
+                    <p class="text-slate-700 text-sm font-medium">डेटा सबमिट करते ही आपका घोषणा पत्र तैयार हो जाएगा। फॉर्म डाउनलोड करें और इसे <strong class="text-blue-600">e-District</strong> पर अपलोड करने में उपयोग करें।</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- बिग जनरेट बटन -->
+            <div class="mt-8 flex justify-center">
+              <button onclick="openFormModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-12 py-5 rounded-[22px] font-bold shadow-xl shadow-blue-500/20 hover:opacity-95 transition-all text-xl group">
+                <span class="bg-white/20 p-2 rounded-full text-white">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                </span>
+                Generate Declaration Form
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+
+            <!-- ================= हमसे संपर्क करें ================= -->
+            <div class="mt-8 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-6 rounded-2xl border border-blue-100">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xl">📞</span>
+                <h3 class="text-base font-bold text-blue-900">Contact Us - हमसे संपर्क करें</h3>
+              </div>
+              <p class="text-xs text-slate-600 mb-4">यदि आपको फॉर्म भरने या किसी अन्य सेवा में सहायता चाहिए, तो हमसे सीधे संपर्क करें:</p>
+
+              <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-700">
+                <a href="https://wa.me/917379412164" target="_blank" class="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2.5 rounded-xl shadow-sm hover:bg-emerald-600 transition-all">
+                  <span>💬 WhatsApp: +91 7379412164</span>
+                </a>
+                <a href="mailto:rimshagraphics2017@gmail.com" class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl shadow-sm border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all">
+                  <span class="text-blue-600">✉️ Email:</span>
+                  <span>rimshagraphics2017@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= ADSENSE CONTENT SECTION (Low Value Fix) ================= -->
+          <article class="bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-slate-100 space-y-6 text-slate-700 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-800 border-b pb-3">स्वप्रमाणित घोषणा पत्र (Self Declaration Form) गाइड एवं महत्वपूर्ण जानकारी</h2>
+            
+            <section class="space-y-2">
+              <h3 class="font-bold text-base text-blue-700">1. स्वप्रमाणित घोषणा पत्र क्या है?</h3>
+              <p>उत्तर प्रदेश ई-डिस्ट्रिक्ट (e-District UP) पोर्टल पर आय प्रमाण पत्र, जाति प्रमाण पत्र और निवास प्रमाण पत्र ऑनलाइन आवेदन करते समय आवेदक से एक 'स्वप्रमाणित घोषणा पत्र' मांगा जाता है। इसमें नागरिक यह स्वीकार करता है कि दी गई सभी जानकारियाँ सही हैं।</p>
+            </section>
+
+            <section class="space-y-2">
+              <h3 class="font-bold text-base text-blue-700">2. इसकी आवश्यकता कहाँ-कहाँ पड़ती है?</h3>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>उत्तर प्रदेश आय प्रमाण पत्र (Income Certificate) आवेदन में।</li>
+                <li>उत्तर प्रदेश जाति प्रमाण पत्र (Caste Certificate) आवेदन में।</li>
+                <li>उत्तर प्रदेश निवास प्रमाण पत्र (Domicile Certificate) आवेदन में।</li>
+                <li>छात्रवृत्ति (Scholarship) एवं पेंशन योजनाओं के ऑनलाइन सत्यापन हेतु।</li>
+              </ul>
+            </section>
+
+            <section class="space-y-2">
+              <h3 class="font-bold text-base text-blue-700">3. 100 KB साइज ही क्यों आवश्यक है?</h3>
+              <p>उत्तर प्रदेश ई-डिस्ट्रिक्ट पोर्टल की आधिकारिक गाइडलाइंस के अनुसार, घोषणा पत्र या किसी भी संलग्न दस्तावेज की इमेज फाइल केवल JPEG या JPG फॉर्मेट में होनी चाहिए और उसका फाइल साइज 100 KB से अधिक नहीं होना चाहिए। रिम्शा ग्राफिक्स टूल इसे स्वचालित रूप से 100 KB के अंदर कंप्रेस करता है।</p>
+            </section>
+          </article>
+
+        </div>
+
+        <!-- राइट साइड बार (सिस्टम ऑप्टिमाइजेशन + पोस्टर) -->
+        <div class="space-y-6">
+          
+          <!-- ऑप्टिमाइजेशन बॉक्स -->
+          <div class="bg-gradient-to-br from-[#0b132b] via-[#1c2541] to-[#3a506b] text-white p-6 rounded-[32px] shadow-xl relative overflow-hidden">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <span class="text-xs font-semibold text-indigo-300 uppercase tracking-widest block mb-1">सिस्टम ऑप्टिमाइजेशन</span>
+                <h3 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-300 tracking-tight">Auto-Optimization</h3>
+              </div>
+              <span class="text-3xl">🚀</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
+                <div class="flex-1 flex justify-between items-center text-xs">
+                  <span class="text-slate-300">टारगेट फ़ाइल साइज़:</span>
+                  <span class="bg-indigo-600/50 text-indigo-200 px-2.5 py-0.5 rounded-lg font-bold">≤ 100 KB</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
+                <div class="flex-1 flex justify-between items-center text-xs">
+                  <span class="text-slate-300">आउटपुट फॉर्मेट:</span>
+                  <span class="bg-emerald-600/50 text-emerald-200 px-2.5 py-0.5 rounded-lg font-bold">JPEG Image</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-2xl border border-white/10">
+                <div class="flex-1 flex justify-between items-center text-xs">
+                  <span class="text-slate-300">इनपुट भाषा:</span>
+                  <span class="bg-red-500 text-white px-2.5 py-0.5 rounded-lg font-bold">केवल हिंदी (Strict)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= POSTER CARD: RIMSHA GRAPHICS ALL SERVICES ================= -->
+          <div class="bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-900 text-white p-6 rounded-[32px] shadow-xl border border-blue-500/30 relative overflow-hidden">
+            
+            <div class="text-center mb-5 border-b border-blue-800/60 pb-4">
+              <div class="inline-block bg-amber-400 text-slate-900 font-black text-2xl px-4 py-1 rounded-xl shadow-md tracking-wider mb-1">
+                RG
+              </div>
+              <h3 class="text-xl font-extrabold text-amber-300 tracking-wide uppercase">Rimsha Graphics</h3>
+              <p class="text-[11px] text-blue-200 italic font-medium">A Complete Solution For Your Needs</p>
+            </div>
+
+            <div class="space-y-2 text-xs font-medium text-slate-200">
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> आय, जाति एवं निवास प्रमाण-पत्र</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> राशन कार्ड, ड्राइविंग लाइसेंस</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> छात्रवृत्ति ऑनलाइन / नवीनीकरण</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> वोटर कार्ड ऑनलाइन / संशोधन</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> पैन कार्ड / आधार कार्ड सेवाएं</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> एल.आई.सी. प्रीमियम भुगतान</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> शादी कार्ड, विजिटिंग कार्ड डिज़ाइन</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> हैण्डबिल, स्कूल आई.डी. कार्ड</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> बैनर / फ्लेक्स, कैश मेमो डिज़ाइन</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> हिन्दी, अंग्रेजी एवं उर्दू टाइपिंग</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> रेल टिकट, एयर टिकट बुकिंग</div>
+              <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl"><span class="text-amber-400">🔴</span> खसरा / खतौनी नकल</div>
+            </div>
+
+            <div class="mt-5 border-t border-blue-800/60 pt-4 text-center">
+              <p class="text-[11px] font-bold text-amber-300 flex items-center justify-center gap-1">
+                📍 रेलवे स्टेशन रोड, मेन मार्केट, बइहरागंज-कुशीनगर
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- फ़ुटर (Footer with AdSense Mandatory Links) -->
+  <footer class="bg-slate-900 text-white border-t border-slate-800 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+      <div class="flex justify-center flex-wrap gap-6 text-xs text-slate-400">
+        <button onclick="openInfoModal('aboutModal')" class="hover:text-white transition-colors">About Us</button>
+        <button onclick="openInfoModal('policyModal')" class="hover:text-white transition-colors">Privacy Policy</button>
+        <button onclick="openInfoModal('termsModal')" class="hover:text-white transition-colors">Terms & Conditions</button>
+        <button onclick="openInfoModal('disclaimerModal')" class="hover:text-white transition-colors">Disclaimer</button>
+      </div>
+      <p class="text-xs text-slate-500">© 2026 Rimsha Graphics. All rights reserved. Designed for e-District Utilities.</p>
     </div>
-  </main>
+  </footer>
 
   <!-- ================= POPUP STEP 1: PREMIUM DATA ENTRY MODAL ================= -->
   <div class="modal" id="formModal">
@@ -311,7 +361,6 @@
               <option value="कृषि">कृषि</option>
               <option value="गृहणी">गृहणी</option>
               <option value="मजदूरी">मजदूरी</option>
-              <option value="मजदूरी">छात्र/छात्रा</option>
               <option value="अन्य">अन्य</option>
             </select>
             <div id="businessOtherContainer" class="relative mt-2 hidden">
@@ -424,8 +473,68 @@
     </div>
   </div>
 
+  <!-- ================= ADSENSE MANDATORY PAGES MODALS ================= -->
+  
+  <!-- About Us Modal -->
+  <div class="modal" id="aboutModal">
+    <div class="modal-content p-6">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <h3 class="text-lg font-bold text-slate-800">About Us - हमारे बारे में</h3>
+        <button onclick="closeInfoModal('aboutModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+        <p><strong>Rimsha Graphics Digital Portal</strong> नागरिकों और जनसेवा केंद्र (CSC) संचालकों के लिए तैयार किया गया एक नि:शुल्क यूटिलिटी वेब टूल है।</p>
+        <p>हमारा मुख्य उद्देश्य ई-डिस्ट्रिक्ट उत्तर प्रदेश (e-District UP) के तहत आय, जाति और निवास प्रमाण पत्र ऑनलाइन आवेदन के लिए आवश्यक स्वप्रमाणित घोषणा पत्र को सरल और त्वरित तरीके से जनरेट करने की सुविधा प्रदान करना है।</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal" id="policyModal">
+    <div class="modal-content p-6">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <h3 class="text-lg font-bold text-slate-800">Privacy Policy - गोपनीयता नीति</h3>
+        <button onclick="closeInfoModal('policyModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+        <p>आपकी गोपनीयता हमारे लिए अत्यंत महत्वपूर्ण है। हम यूजर द्वारा दर्ज की गई किसी भी व्यक्तिगत जानकारी को अपने सर्वर पर स्थायी रूप से स्टोर नहीं करते हैं।</p>
+        <p>गूगल एडसेंस (Google AdSense) और अन्य थर्ड-पार्टी वेंडर्स उपयोगकर्ताओं को उनके पूर्व विज़िट के आधार पर विज्ञापन दिखाने के लिए कुकीज़ (Cookies) का उपयोग कर सकते हैं।</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms & Conditions Modal -->
+  <div class="modal" id="termsModal">
+    <div class="modal-content p-6">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <h3 class="text-lg font-bold text-slate-800">Terms & Conditions - नियम एवं शर्तें</h3>
+        <button onclick="closeInfoModal('termsModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+        <p>इस टूल का उपयोग करके, आप इस बात से सहमत होते हैं कि आपके द्वारा दर्ज किया गया सारा डेटा सत्य और सटीक है।</p>
+        <p>यह पोर्टल केवल फॉर्म फॉर्मेटिंग और इमेज कंप्रेशन सेवा प्रदान करता है और इसका उपयोग केवल वैध सरकारी आवेदनों के लिए ही किया जाना चाहिए।</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer Modal -->
+  <div class="modal" id="disclaimerModal">
+    <div class="modal-content p-6">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <h3 class="text-lg font-bold text-slate-800">Disclaimer - अस्वीकरण</h3>
+        <button onclick="closeInfoModal('disclaimerModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+        <p><strong>Rimsha Graphics</strong> एक निजी डिजिटल टूल पोर्टल है और इसका किसी भी सरकारी विभाग या उत्तर प्रदेश सरकार से प्रत्यक्ष संबंध नहीं है।</p>
+        <p>यह टूल केवल ई-डिस्ट्रिक्ट प्रारूप के अनुसार घोषणा पत्र जनरेट करने में मदद करता है।</p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // --- व्यवसाय सिलेक्शन चेंज हैंडलर ---
+    function openInfoModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeInfoModal(id) { document.getElementById(id).style.display = 'none'; }
+
     function handleBusinessChange() {
       const bVal = document.getElementById('businessSelect').value;
       const bContainer = document.getElementById('businessOtherContainer');
@@ -448,7 +557,6 @@
       return bVal;
     }
 
-    // --- जाति सिलेक्शन चेंज हैंडलर ---
     function handleCasteChange() {
       const casteValue = document.getElementById('caste').value;
       const subcasteInput = document.getElementById('subcaste');
@@ -637,7 +745,6 @@
         { id: "district", title: "जिला" }
       ];
 
-      // 1. सामान्य फ़ील्ड्स चेक
       for (const f of fields) {
         const node = document.getElementById(f.id);
         if (!node.value.trim()) {
@@ -647,7 +754,6 @@
         }
       }
 
-      // 2. व्यवसाय फ़ील्ड चेक
       const bSelectVal = document.getElementById('businessSelect').value;
       if (!bSelectVal) {
         alert("व्यवसाय चुनना अनिवार्य है");
@@ -668,7 +774,6 @@
         }
       }
 
-      // 3. हिंदी भाषा वैलिडेशन चेक (साफ़-सुथरा मैसेज)
       for (const f of fields) {
         if (f.id === "dob" || f.id === "caste") continue;
         const node = document.getElementById(f.id);
@@ -679,7 +784,6 @@
         }
       }
 
-      // 4. हस्ताक्षर चेक
       const uploader = document.getElementById('signatureUpload');
       const hasUploadedFile = uploader.files && uploader.files[0];
 
@@ -709,7 +813,6 @@
       document.getElementById('p_tehsil').innerText = document.getElementById('tehsil').value;
       document.getElementById('p_district').innerText = document.getElementById('district').value;
       
-      // स्थान में जन्म स्थान फ़िल होगा
       document.getElementById('p_place').innerText = document.getElementById('birthPlace').value;
 
       const rightNow = new Date();
